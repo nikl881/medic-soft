@@ -6,6 +6,8 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
+
+
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
@@ -32,6 +34,8 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
+
+
     /*
      * FEATURE CONFIG
      *
@@ -55,6 +59,8 @@ Encore
         config.corejs = 3;
     })
 
+
+
     // enables Sass/SCSS support
     //.enableSassLoader()
 
@@ -63,6 +69,13 @@ Encore
 
     // uncomment if you use React
     .enableReactPreset()
+
+    .autoProvidejQuery()
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    })
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher

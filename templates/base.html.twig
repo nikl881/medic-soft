@@ -1,19 +1,104 @@
 <!DOCTYPE html>
 <html lang="EN">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}MedicSoft | {% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-        {% endblock %}
-    </body>
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}MedicSoft | {% endblock %}</title>
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
+</head>
+<body class="c-app ">
+<div class="c-sidebar c-sidebar-lg-show ">
+    <a href="/" class="c-sidebar-brand d-md-down-none">
+        <img src="{{ asset('') }}" height="40" alt="MedicSoft logo"/>
+    </a>
+    <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="#">
+                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Schedule
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="#">
+                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Patients
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="#">
+                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Consults
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="#">
+                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Doctors
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="#">
+                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Medication
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="#">
+                <i class="fas fa-cog c-sidebar-nav-icon"></i> Preferences
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="">
+                <i class="fas fa-cog c-sidebar-nav-icon"></i>
+                Preferences
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+    </ul>
+    <button class="c-sidebar-minimizer c-brand-minimizer" type="button"></button>
+</div>
+
+<div class="c-wrapper">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">bars here..</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-right">
+                <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <div class="c-body">
+        <main class="c-main">
+            {% block main %}
+            {% endblock %}
+        </main>
+    </div>
+</div>
+</body>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
 </html>
-
-

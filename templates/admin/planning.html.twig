@@ -2,6 +2,47 @@
 
 {% block title %}MedicSoft | Planning{% endblock %}
 
-{% block body %}
-    <div id="root"></div>
+{% block main %}
+    <div class="container">
+
+        <h1>Schedule</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Timeslot</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Treatment</th>
+                <th scope="col">Notifications</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">8:00</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mda</td>
+            </tr>
+            <tr>
+                <th scope="row">9:00</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                <td>thin</td>
+
+            </tr>
+            <tr>
+                <th scope="row">11:15</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                <td>@ad</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div id="root"></div>
+    </div>
 {% endblock %}
