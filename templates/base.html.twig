@@ -11,7 +11,7 @@
     {% endblock %}
 </head>
 <body class="c-app ">
-<div class="c-sidebar c-sidebar-lg-show ">
+<div class="c-sidebar c-sidebar-lg-show" id="sidebar">
     <a href="/" class="c-sidebar-brand d-md-down-none">
         <img src="{{ asset('') }}" height="40" alt="MedicSoft logo"/>
     </a>
@@ -53,23 +53,28 @@
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="">
-                <i class="fas fa-cog c-sidebar-nav-icon"></i>
-                Preferences
-                <span class="badge badge-primary">NEW</span>
-            </a>
-        </li>
     </ul>
     <button class="c-sidebar-minimizer c-brand-minimizer" type="button"></button>
 </div>
-
 <div class="c-wrapper">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">bars here..</a>
+
+                        <!-- werkend maar buggy: -->
+
+                        <button class="c-header-toggler c-class-toggler" type="button" data-target="#sidebar"
+                                data-toggle="collapse" data-class="c-sidebar-lg-show" responsive="true">
+                            <i class="fa fa-lg fa-bars text-white"></i>
+                        </button>
+
+                        <!-- testen oplossing met deze tweede: -->
+
+                        <button class="c-header-toggler c-class-toggler " type="button"
+                                data-toggle="sidebar-show" >
+                            <i class="fa fa-lg fa-bars text-white"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -97,6 +102,7 @@
     </div>
 </div>
 </body>
+
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
