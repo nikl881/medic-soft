@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}MedicSoft | {% endblock %}</title>
-    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -61,18 +60,7 @@
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-
-                        <!-- werkend maar buggy: -->
-
-                        <button class="c-header-toggler c-class-toggler" type="button" data-target="#sidebar"
-                                data-toggle="collapse" data-class="c-sidebar-lg-show" responsive="true">
-                            <i class="fa fa-lg fa-bars text-white"></i>
-                        </button>
-
-                        <!-- testen oplossing met deze tweede: -->
-
-                        <button class="c-header-toggler c-class-toggler " type="button"
-                                data-toggle="sidebar-show" >
+                        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
                             <i class="fa fa-lg fa-bars text-white"></i>
                         </button>
                     </li>
@@ -101,6 +89,9 @@
         </main>
     </div>
 </div>
+
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
 </body>
 
 
