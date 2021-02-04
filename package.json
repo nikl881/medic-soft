@@ -17,6 +17,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@coreui/coreui": "^3.4.0",
+        "@fortawesome/fontawesome-free": "^5.15.2",
+        "@popperjs/core": "^2.6.0",
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.5.1",
+        "perfect-scrollbar": "^1.5.0",
+        "popper.js": "^1.16.1",
         "prop-types": "^15.7.2",
         "react": "^17.0.1",
         "react-dom": "^17.0.1"
