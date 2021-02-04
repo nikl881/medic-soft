@@ -12,36 +12,39 @@
 <body class="c-app ">
 <div class="c-sidebar c-sidebar-lg-show" id="sidebar">
     <a href="/" class="c-sidebar-brand d-md-down-none">
-        <img src="{{ asset('') }}" height="40" alt="MedicSoft logo"/>
+        <img src="{{ asset('build/images/medicsoft-lg.png') }}" height="40" alt="ACME logo">
     </a>
+
+
     <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-title text-left">menu</li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Schedule
+                <i class="c-sidebar-nav-icon fas fa-clock c-sidebar-nav-icon"></i> Schedule
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Patients
+                <i class="c-sidebar-nav-icon fas fa-user c-sidebar-nav-icon"></i> Patients
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Consults
+                <i class="c-sidebar-nav-icon fas fa-heartbeat c-sidebar-nav-icon"></i> Consults
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Doctors
+                <i class="c-sidebar-nav-icon fas fa-user-md c-sidebar-nav-icon"></i> Doctors
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Medication
+                <i class="c-sidebar-nav-icon fas fa-capsules c-sidebar-nav-icon"></i> Medication
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
@@ -89,12 +92,7 @@
         </main>
     </div>
 </div>
-
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
 </body>
-
-
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
