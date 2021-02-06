@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlanningController extends AbstractController
 {
     /**
-     * @Route("/", name="admin")
+     * @Route("/", name="index")
      */
     public function index(): Response
     {
