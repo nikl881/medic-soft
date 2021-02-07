@@ -9,14 +9,9 @@
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
-<body class="c-app ">
-    <div class="c-body">
-        <main class="c-main">
-            {% block main %}
-            {% endblock %}
-        </main>
-    </div>
-</div>
+<body class="c-app c-dark-theme flex-row align-items-center body-unauthorized">
+{% block main %}
+{% endblock %}
 </body>
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
