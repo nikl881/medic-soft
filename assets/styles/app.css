@@ -1,5 +1,10 @@
 @import '~@coreui/coreui/dist/css/coreui.min.css';
 
 body {
-    background-color: lightgray;
+   background-color: #999999;
+}
+
+.body-unauthorized
+{
+    background-image: url("/assets/images/background.png")!important;
 }
