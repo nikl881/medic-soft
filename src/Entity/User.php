@@ -19,6 +19,16 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -39,9 +49,53 @@ class User implements UserInterface
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $medicalSpecialty;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $licenceNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profileImage;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreated;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -125,6 +179,56 @@ class User implements UserInterface
     public function setTitle(?string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getMedicalSpecialty(): ?string
+    {
+        return $this->medicalSpecialty;
+    }
+
+    public function setMedicalSpecialty(string $medicalSpecialty): self
+    {
+        $this->medicalSpecialty = $medicalSpecialty;
+
+        return $this;
+    }
+
+
+
+    public function getLicenceNumber(): ?int
+    {
+        return $this->licenceNumber;
+    }
+
+    public function setLicenceNumber(int $licenceNumber): self
+    {
+        $this->licenceNumber = $licenceNumber;
+
+        return $this;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(?string $profileImage): self
+    {
+        $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    {
+        $this->dateCreated = $dateCreated;
 
         return $this;
     }

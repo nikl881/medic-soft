@@ -18,31 +18,31 @@
         <li class="c-sidebar-nav-title text-left">menu</li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-clock c-sidebar-nav-icon"></i> Schedule
+                <i class="c-sidebar-nav-icon fas fa-clock"></i> Schedule
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-user c-sidebar-nav-icon"></i> Patients
+                <i class="c-sidebar-nav-icon fas fa-user"></i> Patients
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-heartbeat c-sidebar-nav-icon"></i> Consults
+                <i class="c-sidebar-nav-icon fas fa-heartbeat"></i> Consults
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-user-md c-sidebar-nav-icon"></i> Doctors
+                <i class="c-sidebar-nav-icon fas fa-user-md"></i> Doctors
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-capsules c-sidebar-nav-icon"></i> Medication
+                <i class="c-sidebar-nav-icon fas fa-capsules"></i> Medication
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
@@ -57,6 +57,8 @@
     <button class="c-sidebar-minimizer c-brand-minimizer" type="button"></button>
 </div>
 <div class="c-wrapper">
+
+
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul class="navbar-nav mr-auto">
@@ -74,15 +76,28 @@
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('app_logout') }}">Logout</a>
+
+                    <div class="d-none d-md-block">
+                    <div class="c-avatar"><img class="c-avatar-img" src="https://avatars.githubusercontent.com/u/44940871?s=460&u=6104bafc58723b8bcfef1019a73e8a6a60b769ed&v=4" alt="user@email.com"></div>
+                    </div>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <strong>Account settings</strong>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right pt-0" aria-labelledby="navbarDropdownMenuLink">
+                            <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div>
+                            <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-user mr-2"></i> Profile</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-lock mr-2"></i>Lock account</a>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                        </div>
                     </li>
                 </ul>
             </div>
         </nav>
+
     <div class="c-body">
         <main class="c-main">
             {% block main %}
