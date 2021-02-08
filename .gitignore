@@ -11,6 +11,9 @@ vendor/
 .idea/
 migrations/
 
+### Custom Utils connections ###
+src/Utils/
+
 ### Assets ###
 assets/images/*
 
