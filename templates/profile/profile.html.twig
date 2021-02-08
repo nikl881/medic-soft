@@ -3,18 +3,49 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block main %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <h1>Profile settings</h1>
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        Profile information
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="fixed-width-100">Name:</div>
+                            <div>{{ app.user.name }}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="fixed-width-100">Last name:</div>
+                            <div>{{ app.user.lastName }}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="fixed-width-100">Title:</div>
+                            <div>{{ app.user.title }}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="fixed-width-100">Specialty:</div>
+                            <div>{{ app.user.medicalSpecialty }}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="fixed-width-100">Licence:</div>
+                            <div>{{ app.user.licenceNumber }}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="fixed-width-100">Start date:</div>
+                            <div>{{ app.user.dateCreated|date("d/m/Y") }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'E:/Symfony projects/medic-soft/src/Controller/ProfileController.php'|file_link(0) }}">src/Controller/ProfileController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'E:/Symfony projects/medic-soft/templates/profile/profile.html.twig'|file_link(0) }}">templates/profile/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <div class="col-4">
+                Update profile information
+            </div>
+            <div class="col-4">
+                Update profile image
+            </div>
+        </div>
+    </div>
 {% endblock %}
