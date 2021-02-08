@@ -61,7 +61,7 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-2">
-                        <img src="{{ asset('build/images/medicsoft-menu.png') }}" height="50" alt="profile avatar">
+                        <img src="{{ app.user.profileImage }}" height="100" alt="profile avatar">
                         </div>
                         {{ form_start(userProfileForm) }}
                         {{ form_row(userProfileForm.profileImage) }}

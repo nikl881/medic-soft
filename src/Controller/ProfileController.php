@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UpdateProfileImageType;
 use App\Form\UpdateProfileType;
+use App\Utils\uploadImagesToS3;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile", name="profile")
      */
-    public function editProfile(Request $request): Response
+    public function editProfile(Request $request, UploadImagesToS3 $toS3): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -45,7 +46,24 @@ class ProfileController extends AbstractController
 
         if ($profileImageForm->isSubmitted() && $profileImageForm->isValid()) {
 
-            dd("valid");
+            $this->getDoctrine()->getManager();
+            $file = $profileImageForm->get('profileImage')->getData();
+
+            $toS3->uploadProfileImageToS3Bucket($file);
+
+            $image_path = "https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/";
+            $image_name = $file->getClientOriginalName();
+            $combine = $image_path . '' . $image_name;
+
+            $user->setProfileImage($combine);
+
+            $this->addFlash('success', 'Profile image updated!');
+            $this->entityManager->flush();
+
+
+
+
+
         }
 
         return $this->render('profile/profile.html.twig', [
