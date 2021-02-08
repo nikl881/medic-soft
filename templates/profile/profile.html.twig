@@ -6,7 +6,7 @@
     <div class="container">
         <h1>Profile settings</h1>
         <div class="row">
-            <div class="col-4">
+            <div class="col-sm-6 col-lg-4">
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-user"></i> Profile information
@@ -39,21 +39,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-sm-6 col-lg-4">
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-edit"></i> Update profile information
                     </div>
                     <div class="card-body">
-                        {{ form_start(form) }}
-                        {{ form_row(form.name) }}
-                        {{ form_row(form.lastName) }}
-                        {{ form_row(form.title) }}
-                        {{ form_row(form.medicalSpecialty) }}
+                        {{ form_start(userForm) }}
+                        {{ form_row(userForm.name) }}
+                        {{ form_row(userForm.lastName) }}
+                        {{ form_row(userForm.title) }}
+                        {{ form_row(userForm.medicalSpecialty) }}
+                        {{ form_end(userForm) }}
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-sm-6 col-lg-4">
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-edit"></i> Update profile image
@@ -62,8 +63,9 @@
                         <div class="mb-2">
                         <img src="{{ asset('build/images/medicsoft-menu.png') }}" height="50" alt="profile avatar">
                         </div>
-                        {{ form_row(form.profileImage) }}
-                        {{ form_end(form) }}
+                        {{ form_start(userProfileForm) }}
+                        {{ form_row(userProfileForm.profileImage) }}
+                        {{ form_end(userProfileForm) }}
                     </div>
                 </div>
             </div>
