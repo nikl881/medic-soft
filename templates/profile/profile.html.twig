@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}MedicSoft | Profile {% endblock %}
 
 {% block main %}
     <div class="container">
@@ -9,7 +9,7 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-header">
-                        Profile information
+                        <i class="fas fa-user"></i> Profile information
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
@@ -39,12 +39,33 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-4">
-                Update profile information
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-edit"></i> Update profile information
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.lastName) }}
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.medicalSpecialty) }}
+                    </div>
+                </div>
             </div>
             <div class="col-4">
-                Update profile image
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-edit"></i> Update profile image
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                        <img src="{{ asset('build/images/medicsoft-menu.png') }}" height="50" alt="profile avatar">
+                        </div>
+                        {{ form_row(form.profileImage) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
