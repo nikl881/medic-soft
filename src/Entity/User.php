@@ -69,6 +69,11 @@ class User implements UserInterface
      */
     private $dateCreated;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $phoneNumber;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -229,6 +234,18 @@ class User implements UserInterface
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
