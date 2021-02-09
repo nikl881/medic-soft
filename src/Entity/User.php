@@ -74,6 +74,11 @@ class User implements UserInterface
      */
     private $phoneNumber;
 
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $location;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -246,6 +251,18 @@ class User implements UserInterface
     public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }

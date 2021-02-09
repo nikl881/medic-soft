@@ -23,6 +23,7 @@ class UpdateProfileType extends AbstractType
             ->add('lastName', TextType::class)
             ->add('title', TextType::class)
             ->add('medicalSpecialty', TextType::class)
+            ->add('location', TextType::class)
             ->add('phoneNumber', NumberType::class)
             ->add('save', SubmitType::class);
     }

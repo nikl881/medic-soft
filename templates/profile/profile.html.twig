@@ -33,7 +33,11 @@
                             <div>{{ app.user.medicalSpecialty }}</div>
                         </div>
                         <div class="d-flex">
-                            <div class="fixed-width-120">Licence:</div>
+                            <div class="fixed-width-120">Location:</div>
+                            <div>{{ app.user.location }}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="fixed-width-120">MD Licence:</div>
                             <div>{{ app.user.licenceNumber }}</div>
                         </div>
                         <div class="d-flex">
@@ -55,6 +59,7 @@
                         {{ form_row(userForm.title) }}
                         {{ form_row(userForm.phoneNumber) }}
                         {{ form_row(userForm.medicalSpecialty) }}
+                        {{ form_row(userForm.location) }}
                         {{ form_end(userForm) }}
                     </div>
                 </div>
