@@ -17,6 +17,9 @@ src/Utils/
 ### Assets ###
 assets/images/*
 
+### config/settings for AWS utils ###
+src/Utils/uploadImagesToS3.php
+
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

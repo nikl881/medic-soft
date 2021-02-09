@@ -13,27 +13,31 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="fixed-width-100">Name:</div>
+                            <div class="fixed-width-120">Name:</div>
                             <div>{{ app.user.name }}</div>
                         </div>
                         <div class="d-flex">
-                            <div class="fixed-width-100">Last name:</div>
+                            <div class="fixed-width-120">Last name:</div>
                             <div>{{ app.user.lastName }}</div>
                         </div>
                         <div class="d-flex">
-                            <div class="fixed-width-100">Title:</div>
+                            <div class="fixed-width-120">Title:</div>
                             <div>{{ app.user.title }}</div>
                         </div>
                         <div class="d-flex">
-                            <div class="fixed-width-100">Specialty:</div>
+                            <div class="fixed-width-120">Phone number:</div>
+                            <div>{{ app.user.phoneNumber }}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="fixed-width-120">Specialty:</div>
                             <div>{{ app.user.medicalSpecialty }}</div>
                         </div>
                         <div class="d-flex">
-                            <div class="fixed-width-100">Licence:</div>
+                            <div class="fixed-width-120">Licence:</div>
                             <div>{{ app.user.licenceNumber }}</div>
                         </div>
                         <div class="d-flex">
-                            <div class="fixed-width-100">Start date:</div>
+                            <div class="fixed-width-120">Start date:</div>
                             <div>{{ app.user.dateCreated|date("d/m/Y") }}</div>
                         </div>
                     </div>
@@ -49,6 +53,7 @@
                         {{ form_row(userForm.name) }}
                         {{ form_row(userForm.lastName) }}
                         {{ form_row(userForm.title) }}
+                        {{ form_row(userForm.phoneNumber) }}
                         {{ form_row(userForm.medicalSpecialty) }}
                         {{ form_end(userForm) }}
                     </div>
@@ -71,4 +76,15 @@
             </div>
         </div>
     </div>
+    {% block customjavascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+        <script>
+            bsCustomFileInput.init()
+            var btn = document.getElementById('btnResetForm')
+            var form = document.querySelector('form')
+            btn.addEventListener('click', function () {
+                form.reset()
+            })
+        </script>
+    {% endblock %}
 {% endblock %}
