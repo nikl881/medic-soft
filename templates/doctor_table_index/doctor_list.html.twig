@@ -5,7 +5,6 @@
 {% block main %}
     <div class="container">
         <h1>Table of MD employees</h1>
-
         <table class="table table-striped border-secondary">
             <thead>
             <tr>
@@ -27,36 +26,34 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.phoneNumber }}</td>
                 <td>{{ user.location }}</td>
-
-                <td><a data-toggle="modal" href="{{ path('doctor_details', {user: user.id}) }}"><span class="badge navbar-button" data-target="#exampleModal">Details</span></a></td>
-                <td><button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal{{ user.name }}">Modal</button></td>
-
+                <td><i class="fas fa-eye" data-toggle="modal" data-target="#exampleModal{{ user.name }}"></i> &nbsp; <i class="fas fa-edit"></i> </td>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-{% for user in users %}
-    <div class="modal fade" id="exampleModal{{ user.name }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Employee information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ include('doctor_table_index/modal/doctor_details_modal.html.twig') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+    {% for user in users %}
+        <div class="modal fade" id="exampleModal{{ user.name }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user"></i> Employee information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{ app.user.profileImage }}" height="100" alt="profile avatar">
+                        {{ include('doctor_table_index/modal/doctor_details_modal.html.twig') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-{% endfor %}
+    {% endfor %}
 
 {% endblock %}
