@@ -27,22 +27,18 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.phoneNumber }}</td>
                 <td>{{ user.location }}</td>
-                <td>
-                    <a data-toggle="modal" href="{{ path('doctor_details', {user: user.id}) }}"><span class="badge navbar-button">details</span></a>
-                </td>
-{#                <td><i class="fas fa-eye" data-toggle="modal" data-target="#myModal"></i> &nbsp; <i class="fas fa-edit"></i></td>#}
 
-                <td><button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        modal
-                    </button></td>
-{#                <a data-toggle="modal" data-target="#myModal" href="{{ path('doctor_details', {user: user.id}) }}">Open Modal</a>#}
+                <td><a data-toggle="modal" href="{{ path('doctor_details', {user: user.id}) }}"><span class="badge navbar-button" data-target="#exampleModal">Details</span></a></td>
+                <td><button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal{{ user.name }}">Modal</button></td>
+
                 {% endfor %}
-            </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% for user in users %}
+    <div class="modal fade" id="exampleModal{{ user.name }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -52,11 +48,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-{#                    {{ render(controller('App\\Controller\\DoctorListController::showDoctorDetails')) }}#}
-{#                    load complete modal here (doctor_details_modal.html.twig)#}
-{#                    load as an "include"? #}
-
+                    {{ include('doctor_table_index/modal/doctor_details_modal.html.twig') }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -65,5 +57,6 @@
             </div>
         </div>
     </div>
+{% endfor %}
 
 {% endblock %}
