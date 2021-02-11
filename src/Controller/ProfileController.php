@@ -60,10 +60,6 @@ class ProfileController extends AbstractController
             $this->addFlash('success', 'Profile image updated!');
             $this->entityManager->flush();
 
-
-
-
-
         }
 
         return $this->render('profile/profile.html.twig', [

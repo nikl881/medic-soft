@@ -5,9 +5,13 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use PhpParser\Node\Arg;
+use PhpParser\Node\Expr\Array_;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,9 +21,41 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private PaginatorInterface $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, User::class);
+        $this->paginator = $paginator;
+    }
+
+    public function findAllPaginated($page)
+    {
+        $dbquery = $this->createQueryBuilder('v')
+            ->getQuery();
+
+        $pagination = $this->paginator->paginate($dbquery, $page, 5);
+
+        return $pagination;
+    }
+
+    public function userCountQuery(): array
+    {
+        $sql1 = "SELECT c.id FROM App:User c";
+        $countResults = $this->getEntityManager()->createQuery($sql1)->getResult();
+
+        return ($countResults);
+    }
+
+    public function sortByLastNameQuery($lastName)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->orderBy('s.lastName', $lastName);
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
