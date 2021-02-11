@@ -3,43 +3,48 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\changeOrderType;
+use App\Form\OrderChoiceType;
+use App\Form\UpdateProfileType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\Translation\t;
+
 
 class DoctorListController extends AbstractController
 {
 
     private EntityManagerInterface $entityManager;
+    /**
+     * @var UserRepository
+     */
+    private UserRepository $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
         $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
     }
 
     /**
      * @Route("/doctor/list/{page}", defaults={"page": "1"}, name="doctor_table_index")
      */
-    public function showDoctorList($page): Response
+    public function showDoctorList($page, PaginatorInterface $paginator, Request $request, UserRepository $userRepository): Response
     {
 
-//        $repository = $this->getDoctrine()->getRepository(User::class);
-//        $users = $repository->findAll();
-//        $usersAsc = $repository->findBy([], ['lastName' => 'ASC']);
-//        $usersDesc = $repository->findBy([], ['lastName' => 'DESC']);
-
-        $users = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAllPaginated($page);
-
+        $orderChoiceform = $this->createForm(OrderChoiceType::class);
+        $orderChoiceform->handleRequest($request);
 
         return $this->render('doctor_table_index/doctor_list.html.twig', [
-                    'users' => $users,
-//                'users  bAsc' => $usersAsc,
-//                'usersDesc' => $usersDesc,
+
+                'users' => $this->userRepository->sortByLastNameQuery(
+                    $orderChoiceform->get('lastName')->getData(),
+                ),
+                'form' => $orderChoiceform->createView(),
             ]
         );
     }
@@ -53,6 +58,5 @@ class DoctorListController extends AbstractController
             'user' => $user,
         ]);
     }
-
 
 }

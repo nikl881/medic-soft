@@ -8,11 +8,12 @@
         <div class="mb-2 mt-3">
             {# <button class="btn btn-secondary hideshow" data-id="tr1"><i class="fas fa-sort"></i>Sort name A-Z</button> #}
             {# {{ include('doctor_table_index/includes/sort.html.twig') }} #}
-
         </div>
-
-        {{ knp_pagination_render(users) }}
-
+        {{ form(form) }}
+{#        {{ dump(users) }}#}
+        <div class="navigation">
+{#            {{ knp_pagination_render(users) }}#}
+        </div>
         <table class="table table-striped border-secondary">
             <thead>
             <tr>
@@ -26,7 +27,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for user in users|sort((a, b) => a.name <=> b.name) %}
+            {% for user in users %}
                 <tr>
                     <td>{{ user.lastName }}, {{ user.name|first }}</td>
                     <td><img class="c-avatar-img table-avatar-img" src="{{ user.profileImage }}" alt="avatar"></td>
@@ -38,11 +39,6 @@
                     </td>
                 </tr>
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-
 
     {% for user in users %}
         <div class="modal fade" id="exampleModal{{ user.name }}" tabindex="-1" role="dialog"

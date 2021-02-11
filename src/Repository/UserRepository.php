@@ -6,6 +6,8 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use PhpParser\Node\Arg;
+use PhpParser\Node\Expr\Array_;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,6 +21,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    /**
+     * @var PaginatorInterface
+     */
+    private PaginatorInterface $paginator;
+
     public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, User::class);
@@ -27,17 +34,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findAllPaginated($page)
     {
-
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();
 
         $pagination = $this->paginator->paginate($dbquery, $page, 5);
 
-//        dd($pagination);
-
         return $pagination;
     }
 
+    public function userCountQuery(): array
+    {
+        $sql1 = "SELECT c.id FROM App:User c";
+        $countResults = $this->getEntityManager()->createQuery($sql1)->getResult();
+
+        return ($countResults);
+    }
+
+    public function sortByLastNameQuery($lastName)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->orderBy('s.lastName', $lastName);
+
+        return $qb->getQuery()->getResult();
+    }
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
@@ -52,8 +71,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
-
-
 
     // /**
     //  * @return User[] Returns an array of User objects
