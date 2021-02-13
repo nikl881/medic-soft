@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class OrderChoiceType extends AbstractType
+class OrderBySelectionType extends AbstractType
 {
 
     private UserRepository $userRepository;
@@ -18,7 +18,6 @@ class OrderChoiceType extends AbstractType
         $this->userRepository = $userRepository;
     }
 
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('lastName', ChoiceType::class, [
@@ -26,8 +25,17 @@ class OrderChoiceType extends AbstractType
                 'ASC' => "ASC",
                 'DESC' => "DESC",
             ]]);
-        $builder->add('save', SubmitType::class);
+
+        $builder->add('location', ChoiceType::class, [
+            'choices' => [
+                'ASC' => "ASC",
+                'DESC' => "DESC",
+            ]
+        ]);
+
+
+
+        $builder->add('select', SubmitType::class);
 
     }
-
 }
