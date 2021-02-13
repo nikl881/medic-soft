@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class OrderBySelectionType extends AbstractType
+class OrderByLastNameType extends AbstractType
 {
 
     private UserRepository $userRepository;
@@ -25,14 +25,6 @@ class OrderBySelectionType extends AbstractType
                 'ASC' => "ASC",
                 'DESC' => "DESC",
             ]]);
-
-        $builder->add('location', ChoiceType::class, [
-            'choices' => [
-                'ASC' => "ASC",
-                'DESC' => "DESC",
-            ]
-        ]);
-
 
 
         $builder->add('select', SubmitType::class);

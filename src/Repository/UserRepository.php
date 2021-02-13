@@ -37,7 +37,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();
 
-        $pagination = $this->paginator->paginate($dbquery, $page, 5);
+        $pagination = $this->paginator->paginate($dbquery, $page, 2);
 
         return $pagination;
     }
@@ -53,7 +53,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function sortByLastNameQuery($lastName)
     {
         $qb = $this->createQueryBuilder('s')
-            ->orderBy('s.lastName', $lastName);
+            ->orderBy('s.lastName', $lastName)
+        ;
 
         return $qb->getQuery()->getResult();
     }

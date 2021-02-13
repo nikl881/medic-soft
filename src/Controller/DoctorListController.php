@@ -3,8 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\OrderChoiceType;
-use App\Form\UpdateProfileType;
+use App\Form\OrderByLastNameType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -12,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Symfony\Component\Translation\t;
 
 
 class DoctorListController extends AbstractController
@@ -31,20 +29,32 @@ class DoctorListController extends AbstractController
     }
 
     /**
-     * @Route("/doctor/list/{page}", defaults={"page": "1"}, name="doctor_table_index")
+     * @Route("/doctor/list/{page}", defaults={"page": 1 }, name="doctor_table_index")
      */
-    public function showDoctorList($page, PaginatorInterface $paginator, Request $request, UserRepository $userRepository): Response
+    public function showDoctorList($page, Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
     {
+//        $orderByForm = $this->createForm(OrderByLastNameType::class);
+//        $orderByForm->handleRequest($request);
+//
+//        $dql   = "SELECT s FROM App\Entity\User s";
+//        $query = $entityManager->createQuery($dql);
+//
+//        $pagination = $paginator->paginate(
+//            $query,
+//            $request->query->getInt('page', 1),3);
 
-        $orderChoiceform = $this->createForm(OrderChoiceType::class);
-        $orderChoiceform->handleRequest($request);
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAllPaginated($page);
+
 
         return $this->render('doctor_table_index/doctor_list.html.twig', [
-
-                'users' => $this->userRepository->sortByLastNameQuery(
-                    $orderChoiceform->get('lastName')->getData(),
-                ),
-                'form' => $orderChoiceform->createView(),
+                  'users' => $users
+//                'pagination' => $pagination,
+//                'users' => $this->userRepository->sortByLastNameQuery(
+//                    $orderByForm->get('lastName')->getData(),
+//                ),
+//                'form' => $orderByForm->createView(),
             ]
         );
     }
@@ -55,7 +65,7 @@ class DoctorListController extends AbstractController
     public function showDoctorDetails(User $user)
     {
         return $this->render('doctor_table_index/modal/doctor_details_modal.html.twig', [
-            'user' => $user,
+            'users' => $users,
         ]);
     }
 
