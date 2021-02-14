@@ -34,3 +34,8 @@ body {
     max-width: 30px;
     max-height: 30px;
 }
+
+.deco-none {
+    color: inherit;
+    text-decoration:none;
+}

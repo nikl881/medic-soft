@@ -79,6 +79,11 @@ class User implements UserInterface
      */
     private $location;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $working;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -263,6 +268,18 @@ class User implements UserInterface
     public function setLocation(?string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getWorking(): ?bool
+    {
+        return $this->working;
+    }
+
+    public function setWorking(bool $working): self
+    {
+        $this->working = $working;
 
         return $this;
     }

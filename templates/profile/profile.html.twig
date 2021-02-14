@@ -71,7 +71,12 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-2">
-                        <img src="{{ app.user.profileImage }}" height="100" alt="profile avatar">
+                            {% if app.user.profileImage == null %}
+                                <img src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                                     height="100" alt="avatar placeholder">
+                            {% else %}
+                                <img src="{{ app.user.profileImage }}" height="100" alt="profile avatar">
+                            {% endif %}
                         </div>
                         {{ form_start(userProfileForm) }}
                         {{ form_row(userProfileForm.profileImage) }}

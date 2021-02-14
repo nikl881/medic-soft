@@ -37,7 +37,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();
 
-        $pagination = $this->paginator->paginate($dbquery, $page, 2);
+        $pagination = $this->paginator->paginate($dbquery, $page, 10);
 
         return $pagination;
     }
