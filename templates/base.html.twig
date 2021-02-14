@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{% block title %}MedicSoft | main {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     {% block stylesheets %}
@@ -17,7 +18,7 @@
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-title text-left">menu</li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="#">
+            <a class="c-sidebar-nav-link" href="{{ path('index') }}">
                 <i class="c-sidebar-nav-icon fas fa-clock"></i> Schedule
                 <span class="badge badge-primary">NEW</span>
             </a>
@@ -75,7 +76,11 @@
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
                 <div class="c-avatar">
-                    <img class="c-avatar-img" src="{{ app.user.profileImage }}" alt="avatar">
+                    {% if app.user.profileImage == null %}
+                        <img class="c-avatar-img table-avatar-img" src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg" alt="avatar placeholder">
+                    {% else %}
+                        <img class="c-avatar-img table-avatar-img" src="{{ app.user.profileImage }}" alt="avatar">
+                    {% endif %}
                 </div>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button"

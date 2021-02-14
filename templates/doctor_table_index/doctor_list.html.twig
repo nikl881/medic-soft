@@ -4,42 +4,51 @@
 
 {% block main %}
     <div class="container">
-        <h1>Table of MD employees</h1>
-        <div class="mb-2 mt-3">
-            {# <button class="btn btn-secondary hideshow" data-id="tr1"><i class="fas fa-sort"></i>Sort name A-Z</button> #}
-            {# {{ include('doctor_table_index/includes/sort.html.twig') }} #}
-        </div>
-        {{ form(form) }}
-{#        {{ dump(users) }}#}
-        <div class="navigation">
-{#            {{ knp_pagination_render(users) }}#}
-        </div>
-        <table class="table table-striped border-secondary">
-            <thead>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
+        <h1 class="text-center">List of MD employees</h1>
+    </div>
+    <table class="table table-striped border-secondary">
+        <thead>
+        <tr>
+            <th scope="col">{{ knp_pagination_sortable(users, 'Last name', 'v.lastName') }} &nbsp;<i
+                        class="fas fa-sort"></i></th>
+            <th scope="col"></th>
+            <th scope="col">{{ knp_pagination_sortable(users, 'Medical specialism', 'v.medicalSpecialty') }} &nbsp;<i
+                        class="fas fa-sort"></i></th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Available</th>
+            <th scope="col">{{ knp_pagination_sortable(users, 'Location', 'v.location') }} &nbsp;<i
+                        class="fas fa-sort"></i></th>
+            <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col"></th>
-                <th scope="col">Medical specialism</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Location</th>
-                <th scope="col">Details</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{ user.lastName }}, {{ user.name|first }}</td>
-                    <td><img class="c-avatar-img table-avatar-img" src="{{ user.profileImage }}" alt="avatar"></td>
-                    <td>{{ user.medicalSpecialty }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phoneNumber }}</td>
-                    <td>{{ user.location }}</td>
-                    <td><i class="fas fa-eye" data-toggle="modal" data-target="#exampleModal{{ user.name }}"></i>
-                    </td>
-                </tr>
-            {% endfor %}
+                <td>{{ user.lastName }}, {{ user.name|first }}</td>
+                {% if user.profileImage == null %}
+                <td><img class="c-avatar-img table-avatar-img" src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg" alt="avatar placeholder"></td>
+                {% else %}
+                <td><img class="c-avatar-img table-avatar-img" src="{{ user.profileImage }}" alt="avatar"></td>
+                {% endif %}
+                <td>{{ user.medicalSpecialty }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phoneNumber }}</td>
+                <td>
+                    {% if user.working == true %}
+                        <i class="fas fa-circle text-success fa-sm"></i>
+                    {% else %}
+                        <i class="fas fa-circle text-danger fa-sm"></i>
+                    {% endif %}
 
+                <td>{{ user.location }}</td>
+                <td><i class="fas fa-eye" data-toggle="modal" data-target="#exampleModal{{ user.name }}"></i>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     {% for user in users %}
         <div class="modal fade" id="exampleModal{{ user.name }}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel"
@@ -54,7 +63,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="{{ user.profileImage }}" height="100" alt="profile avatar">
+                        {% if user.profileImage == null %}
+                            <img src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                                 height="100" alt="avatar placeholder">
+                        {% else %}
+                            <img src="{{ user.profileImage }}" height="100" alt="profile avatar">
+                        {% endif %}
                         {{ include('doctor_table_index/modal/doctor_details_modal.html.twig') }}
                     </div>
                     <div class="modal-footer">
@@ -65,4 +79,16 @@
         </div>
     {% endfor %}
 
+    <div class="row">
+        <div class="col-2">
+            <div class="navigation">
+                {{ knp_pagination_render(users) }}
+            </div>
+        </div>
+        <div class="col-9">
+        </div>
+        <div class="col-1">
+            <strong>Total:</strong> <i>{{ users.getTotalItemCount }}</i>
+        </div>
+    </div>
 {% endblock %}
