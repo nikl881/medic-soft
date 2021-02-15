@@ -35,11 +35,27 @@
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ path('doctor_table_index') }}">
-                <i class="c-sidebar-nav-icon fas fa-user-md"></i> Doctors
-                <span class="badge badge-primary">NEW</span>
+        <li class="c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="c-sidebar-nav-icon fas fa-user-md"></i> Medical Staff
             </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="#">
+                        Overview
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="{{ path('doctor_table_index') }}">
+                        List of MD employees
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="#">
+                        Medical support staff
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
@@ -47,7 +63,6 @@
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
-
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
                 <i class="fas fa-cog c-sidebar-nav-icon"></i> Preferences
@@ -77,7 +92,9 @@
             <ul class="navbar-nav ml-auto">
                 <div class="c-avatar">
                     {% if app.user.profileImage == null %}
-                        <img class="c-avatar-img table-avatar-img" src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg" alt="avatar placeholder">
+                        <img class="c-avatar-img table-avatar-img"
+                             src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                             alt="avatar placeholder">
                     {% else %}
                         <img class="c-avatar-img table-avatar-img" src="{{ app.user.profileImage }}" alt="avatar">
                     {% endif %}
