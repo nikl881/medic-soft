@@ -35,7 +35,7 @@ class DoctorListController extends AbstractController
 
         $users = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findAllPaginated($page);
+            ->findAllPaginatedDoctors($page);
 
 
         return $this->render('doctor/doctor_list.html.twig', [

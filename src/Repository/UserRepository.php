@@ -32,7 +32,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->paginator = $paginator;
     }
 
-    public function findAllPaginated($page)
+    public function findAllPaginatedDoctors($page)
     {
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();

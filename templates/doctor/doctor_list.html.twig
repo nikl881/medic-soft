@@ -41,7 +41,6 @@
                     {% else %}
                         <i class="fas fa-circle text-danger fa-sm"></i>
                     {% endif %}
-
                 <td>{{ user.location }}</td>
                 <td><i class="fas fa-eye" data-toggle="modal" data-target="#exampleModal{{ user.name }}"></i>
                 </td>
@@ -49,6 +48,7 @@
         {% endfor %}
         </tbody>
     </table>
+
     {% for user in users %}
         <div class="modal fade" id="exampleModal{{ user.name }}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel"

@@ -35,11 +35,11 @@ class PatientFixtures extends Fixture
         $randomDate = date("d.m.Y", $timestamp);
 
         return [
-            ['Jan', 'de Hoop', date("Y-m-d H:i:s", (rand(1262055681,1262055681))) , "jandehoop@mail.com", 922354, 'Achmea', "06-1345667"],
-            ['Jan', 'de Hoop', date("Y-m-d H:i:s", (rand(1262055681,1262055681))) , "jandehoop@mail.com", 922354, 'Achmea', "06-1345667"],
-            ['Willem', 'Rijners', date("Y-m-d H:i:s", (rand(1262055681,1262055681))), "willemrijners@mail.com", 322354, 'Zilverenkruis', "06-1345667"],
-            ['Josh', 'Zwart', date("Y-m-d H:i:s", (rand(1262055681,1262055681))), "joshzwart@mail.com", 122354, 'Agis', "06-1345667"],
-            ['Martha', 'Peters', date("Y-m-d H:i:s", (rand(1262055681,1262055681))), "marthapeters@mail.com", 462354, 'Mensis', "06-1345667"],
+            ['Jan', 'de Hoop', date("Y-m-d H:i:s", (rand())) , "jandehoop@mail.com", 922354, 'Achmea', "06-1345667"],
+            ['Jan', 'de Hoop', date("Y-m-d H:i:s", (rand())) , "jandehoop@mail.com", 922354, 'Achmea', "06-1345667"],
+            ['Willem', 'Rijners', date("Y-m-d H:i:s", (rand())), "willemrijners@mail.com", 322354, 'Zilverenkruis', "06-1345667"],
+            ['Josh', 'Zwart', date("Y-m-d H:i:s", (rand())), "joshzwart@mail.com", 122354, 'Agis', "06-1345667"],
+            ['Martha', 'Peters', date("Y-m-d H:i:s", (rand())), "marthapeters@mail.com", 462354, 'Mensis', "06-1345667"],
         ];
     }
 }

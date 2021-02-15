@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -83,6 +85,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $working;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="primaryDoctor")
+     */
+    private $patients;
+
+    public function __construct()
+    {
+        $this->patients = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -280,6 +292,36 @@ class User implements UserInterface
     public function setWorking(bool $working): self
     {
         $this->working = $working;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Patient[]
+     */
+    public function getPatients(): Collection
+    {
+        return $this->patients;
+    }
+
+    public function addPatient(Patient $patient): self
+    {
+        if (!$this->patients->contains($patient)) {
+            $this->patients[] = $patient;
+            $patient->setPrimaryDoctor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Patient $patient): self
+    {
+        if ($this->patients->removeElement($patient)) {
+            // set the owning side to null (unless already changed)
+            if ($patient->getPrimaryDoctor() === $this) {
+                $patient->setPrimaryDoctor(null);
+            }
+        }
 
         return $this;
     }
