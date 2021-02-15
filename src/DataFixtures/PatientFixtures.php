@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Patient;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -34,11 +35,11 @@ class PatientFixtures extends Fixture
         $randomDate = date("d.m.Y", $timestamp);
 
         return [
-
-            ['Jan', 'de Hoop', (new \DateTime($randomDate)), "jandehoop@mail.com", 922354, 'Achmea', "06-1345667"],
-            ['Willem', 'Rijners', (new \DateTime($randomDate)), "willemrijners@mail.com", 322354, 'Zilverenkruis', "06-1345667"],
-            ['Josh', 'Zwart', (new \DateTime($randomDate)), "joshzwart@mail.com", 122354, 'Agis', "06-1345667"],
-            ['Martha', 'Peters', (new \DateTime($randomDate)), "marthapeters@mail.com", 462354, 'Mensis', "06-1345667"],
+            ['Jan', 'de Hoop', date("Y-m-d H:i:s", (rand(1262055681,1262055681))) , "jandehoop@mail.com", 922354, 'Achmea', "06-1345667"],
+            ['Jan', 'de Hoop', date("Y-m-d H:i:s", (rand(1262055681,1262055681))) , "jandehoop@mail.com", 922354, 'Achmea', "06-1345667"],
+            ['Willem', 'Rijners', date("Y-m-d H:i:s", (rand(1262055681,1262055681))), "willemrijners@mail.com", 322354, 'Zilverenkruis', "06-1345667"],
+            ['Josh', 'Zwart', date("Y-m-d H:i:s", (rand(1262055681,1262055681))), "joshzwart@mail.com", 122354, 'Agis', "06-1345667"],
+            ['Martha', 'Peters', date("Y-m-d H:i:s", (rand(1262055681,1262055681))), "marthapeters@mail.com", 462354, 'Mensis', "06-1345667"],
         ];
     }
 }

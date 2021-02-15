@@ -28,7 +28,7 @@ class Patient
     private $lastName;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
     private $birthdate;
 
@@ -149,15 +149,21 @@ class Patient
         return $this;
     }
 
-    public function getBirthdate(): ?\DateTimeInterface
+    /**
+     * @return mixed
+     */
+    public function getBirthdate()
     {
         return $this->birthdate;
     }
 
-    public function setBirthdate(\DateTimeInterface $birthdate): self
+    /**
+     * @param mixed $birthdate
+     */
+    public function setBirthdate($birthdate): void
     {
         $this->birthdate = $birthdate;
-
-        return $this;
     }
+
+
 }
