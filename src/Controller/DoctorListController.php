@@ -28,32 +28,18 @@ class DoctorListController extends AbstractController
     }
 
     /**
-     * @Route("/doctor/list/{page}", defaults={"page": 1 }, name="doctor_table_index")
+     * @Route("/doctor/list/{page}", defaults={"page": 1 }, name="doctor_list")
      */
     public function showDoctorList($page, Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
     {
-//        $orderByForm = $this->createForm(OrderByLastNameType::class);
-//        $orderByForm->handleRequest($request);
-//
-//        $dql   = "SELECT s FROM App\Entity\User s";
-//        $query = $entityManager->createQuery($dql);
-//
-//        $pagination = $paginator->paginate(
-//            $query,
-//            $request->query->getInt('page', 1),3);
 
         $users = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findAllPaginated($page);
+            ->findAllPaginatedDoctors($page);
 
 
-        return $this->render('doctor_table_index/doctor_list.html.twig', [
-                  'users' => $users
-//                'pagination' => $pagination,
-//                'users' => $this->userRepository->sortByLastNameQuery(
-//                    $orderByForm->get('lastName')->getData(),
-//                ),
-//                'form' => $orderByForm->createView(),
+        return $this->render('doctor/doctor_list.html.twig', [
+                'users' => $users
             ]
         );
     }
@@ -63,9 +49,7 @@ class DoctorListController extends AbstractController
      */
     public function showDoctorDetails(User $user)
     {
-        return $this->render('doctor_table_index/modal/doctor_details_modal.html.twig', [
-            'users' => $users,
-        ]);
+        return $this->render('doctor/modal/doctor_details_modal.html.twig');
     }
 
 }
