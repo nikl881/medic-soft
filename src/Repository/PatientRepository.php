@@ -34,7 +34,7 @@ class PatientRepository extends ServiceEntityRepository
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();
 
-        $pagination = $this->paginator->paginate($dbquery, $page, 3);
+        $pagination = $this->paginator->paginate($dbquery, $page, 10);
 
         return $pagination;
     }

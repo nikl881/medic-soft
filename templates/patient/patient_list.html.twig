@@ -10,8 +10,10 @@
         <table class="table table-striped border-secondary">
             <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Last name</th>
+                <th scope="col">{{ knp_pagination_sortable(patients, 'Name', 'v.name') }} <i
+                            class="fas fa-sort"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(patients, 'Last name', 'v.lastName') }} <i
+                            class="fas fa-sort"></i></th>
                 <th scope="col">Email</th>
                 <th scope="col">Date of birth</th>
                 <th scope="col">Insurance number</th>
