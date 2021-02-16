@@ -59,9 +59,10 @@ class Patient
     private $dateCreated;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="patients")
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $primaryDoctor;
+    private $primaryDoctorId;
+
 
 
     public function getId(): ?int
@@ -170,14 +171,14 @@ class Patient
         $this->birthdate = $birthdate;
     }
 
-    public function getPrimaryDoctor(): ?User
+    public function getPrimaryDoctorId(): ?int
     {
-        return $this->primaryDoctor;
+        return $this->primaryDoctorId;
     }
 
-    public function setPrimaryDoctor(?User $primaryDoctor): self
+    public function setPrimaryDoctorId(?int $primaryDoctorId): self
     {
-        $this->primaryDoctor = $primaryDoctor;
+        $this->primaryDoctorId = $primaryDoctorId;
 
         return $this;
     }
