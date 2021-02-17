@@ -32,7 +32,11 @@
                 <td>{{ patient.insuranceNumber }}</td>
                 <td>{{ patient.insuranceCompany }}</td>
                 <td>{{ patient.phoneNumber }}</td>
-                <td>{{ patient.primaryDoctorId }}</td>
+                {% if patient.user.lastName is defined %}
+                <td>{{ patient.user.lastName }}, {{ patient.user.name|first }}</td>
+                {% else %}
+                    <td>Not assigned</td>
+                    {% endif %}
             </tr>
             {% endfor %}
             </tbody>

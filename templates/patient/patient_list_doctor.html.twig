@@ -32,8 +32,7 @@
                 <td>{{ patient.insuranceNumber }}</td>
                 <td>{{ patient.insuranceCompany }}</td>
                 <td>{{ patient.phoneNumber }}</td>
-                <td>{{ patient.primaryDoctorId }}</td>
-{#                <td>{{ patient.primaryDoctor.lastName }}, {{ patient.primaryDoctor.name|first }}</td>#}
+                <td>{{ patient.user.lastName }}, {{ patient.user.name|first }}</td>
             </tr>
             {% endfor %}
             </tbody>
