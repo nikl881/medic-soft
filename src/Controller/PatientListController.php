@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
-use App\Entity\User;
 use App\Repository\PatientRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,13 +37,13 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/list-doctor/{page}",  defaults={"page": 1 }, name="patient_list_doctor")
      */
-    public function showDoctorsPatientList(): Response
+    public function showDoctorsPatientList(PaginatorInterface $paginator, $page): Response
     {
         $user = $this->getUser();
 
         $allDoctorIdInPatientList = $this->getDoctrine()
             ->getRepository(Patient::class)
-            ->getDoctorIdInPatientList($user);
+            ->getDoctorIdInPatientList($user , $page);
 
 
         return $this->render('patient/patient_list_doctor.html.twig', [

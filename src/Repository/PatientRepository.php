@@ -59,16 +59,17 @@ class PatientRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function getDoctorIdInPatientList(User $user)
+    public function getDoctorIdInPatientList(User $user, $page)
     {
         $qb = $this->createQueryBuilder('p');
 
-        $qb->select('p.primaryDoctorId')
+        $qb->select('p')
             ->where('p.primaryDoctorId = :userId')
             ->setParameter('userId',  $user->getId());
 
+        $pagination = $this->paginator->paginate($qb, $page, 10);
 
-        return $qb->getQuery()->getResult();
+        return $pagination;
     }
 
 
@@ -84,15 +85,4 @@ class PatientRepository extends ServiceEntityRepository
     }
 
 
-//    public function getDoctorIdInPatientList(User $user)
-//    {
-//        $qb = $this->createQueryBuilder('p');
-//        $qb->select('p.primaryDoctor');
-//
-//        $qb->select('identity(p.primaryDoctor)');  // parent fk id for entity
-//
-//
-//        return $qb->getQuery()->getResult();
-//
-//    }
 }
