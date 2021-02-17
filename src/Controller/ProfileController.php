@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UpdateProfileAddressType;
 use App\Form\UpdateProfileImageType;
 use App\Form\UpdateProfileType;
 use App\Utils\uploadImagesToS3;
@@ -41,6 +42,18 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('profile');
         }
 
+
+        $addressForm = $this->createForm(UpdateProfileAddressType::class);
+        $addressForm->handleRequest($request);
+
+        if ($addressForm->isSubmitted() &&  $addressForm->isValid())
+        {
+            $this->addFlash('success', 'Address updated');
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('profile');
+        }
+
         $profileImageForm = $this->createForm(UpdateProfileImageType::class, $user);
         $profileImageForm->handleRequest($request);
 
@@ -65,6 +78,7 @@ class ProfileController extends AbstractController
         return $this->render('profile/profile.html.twig', [
             'userForm' => $profileForm->createView(),
             'userProfileForm' => $profileImageForm->createView(),
+            'addressForm' => $addressForm->createView(),
 
         ]);
     }

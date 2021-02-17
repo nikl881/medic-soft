@@ -47,6 +47,11 @@ class Address
      */
     private $country;
 
+    /**
+     * @ORM\OneToOne(targetEntity=user::class, cascade={"persist", "remove"})
+     */
+    private $user;
+
 
 
     public function getId(): ?int
@@ -122,6 +127,18 @@ class Address
     public function setCountry(?string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
