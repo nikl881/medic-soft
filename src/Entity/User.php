@@ -96,6 +96,7 @@ class User implements UserInterface
      */
     private $user_id;
 
+
     public function __construct()
     {
         $this->patients = new ArrayCollection();
@@ -346,4 +347,6 @@ class User implements UserInterface
     {
         $this->user_id = $user_id;
     }
+
+
 }

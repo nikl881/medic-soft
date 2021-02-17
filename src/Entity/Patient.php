@@ -69,6 +69,11 @@ class Patient
      */
     private ?User $user;
 
+//    /**
+//     * @ORM\OneToOne(targetEntity=Address::class, mappedBy="patient", cascade={"persist", "remove"})
+//     */
+//    private ?Address $address;
+
 
     public function getId(): ?int
     {
@@ -199,6 +204,28 @@ class Patient
     {
         $this->user = $user;
     }
+
+//    public function getAddress(): ?Address
+//    {
+//        return $this->address;
+//    }
+//
+//    public function setAddress(?Address $address): self
+//    {
+//        // unset the owning side of the relation if necessary
+//        if ($address === null && $this->address !== null) {
+//            $this->address->setPatient(null);
+//        }
+//
+//        // set the owning side of the relation if necessary
+//        if ($address !== null && $address->getPatient() !== $this) {
+//            $address->setPatient($this);
+//        }
+//
+//        $this->address = $address;
+//
+//        return $this;
+//    }
 
 
 }
