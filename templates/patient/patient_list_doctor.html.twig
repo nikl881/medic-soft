@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MedicSoft | Patients {% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
+            <h1 class="text-center"><i class="fas fa-user"></i> List of patients - {{ app.user.title }} {{ app.user.lastName }}</h1>
+        </div>
+        <table class="table table-striped border-secondary">
+            <thead>
+            <tr>
+                <th scope="col">{{ knp_pagination_sortable(patients, 'Name', 'v.name') }} <i
+                            class="fas fa-sort"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(patients, 'Last name', 'v.lastName') }} <i
+                            class="fas fa-sort"></i></th>
+                <th scope="col">Email</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Insurance number</th>
+                <th scope="col">Insurance company</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Primary physician</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for patient in patients  %}
+            <tr>
+                <td>{{ patient.name }}</td>
+                <td>{{ patient.lastName }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.birthdate|date("d-m-Y") }}</td>
+                <td>{{ patient.insuranceNumber }}</td>
+                <td>{{ patient.insuranceCompany }}</td>
+                <td>{{ patient.phoneNumber }}</td>
+                <td>{{ patient.user.lastName }}, {{ patient.user.name|first }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-2">
+                <div class="navigation">
+                    {{ knp_pagination_render(patients) }}
+                </div>
+            </div>
+            <div class="col-9">
+            </div>
+            <div class="col-1">
+                <strong>Total:</strong> <i>{{ patients.getTotalItemCount }}</i>
+            </div>
+        </div>
+    </div>
+{% endblock %}

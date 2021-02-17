@@ -1,17 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PatientListController!{% endblock %}
+{% block title %}MedicSoft | Patients{% endblock %}
 
 {% block main %}
     <div class="container">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
-            <h1 class="text-center">List of patients</h1>
+            <h1 class="text-center"><i class="fas fa-user"></i> List of total patients </h1>
         </div>
         <table class="table table-striped border-secondary">
             <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Last name</th>
+                <th scope="col">{{ knp_pagination_sortable(patients, 'Name', 'v.name') }} <i
+                            class="fas fa-sort"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(patients, 'Last name', 'v.lastName') }} <i
+                            class="fas fa-sort"></i></th>
                 <th scope="col">Email</th>
                 <th scope="col">Date of birth</th>
                 <th scope="col">Insurance number</th>
@@ -30,7 +32,11 @@
                 <td>{{ patient.insuranceNumber }}</td>
                 <td>{{ patient.insuranceCompany }}</td>
                 <td>{{ patient.phoneNumber }}</td>
-                <td>{{ patient.primaryDoctor.lastName }}, {{ patient.primaryDoctor.name|first }}</td>
+                {% if patient.user.lastName is defined %}
+                <td>{{ patient.user.lastName }}, {{ patient.user.name|first }}</td>
+                {% else %}
+                    <td>Not assigned</td>
+                    {% endif %}
             </tr>
             {% endfor %}
             </tbody>

@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method Patient|null find($id, $lockMode = null, $lockVersion = null)
@@ -34,8 +35,53 @@ class PatientRepository extends ServiceEntityRepository
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();
 
-        $pagination = $this->paginator->paginate($dbquery, $page, 3);
+        $pagination = $this->paginator->paginate($dbquery, $page, 10);
 
         return $pagination;
     }
+
+    public function findAllPaginatedPatientsForDoctor($page)
+    {
+        $dbquery = $this->createQueryBuilder('v')
+            ->getQuery();
+
+        $pagination = $this->paginator->paginate($dbquery, $page, 10);
+
+        return $pagination;
+    }
+
+    public function loadUserId($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id = id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getDoctorForPatientList(User $user, $page)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        $qb->select('v')
+            ->where('v.user = :userId')
+            ->setParameter('userId',  $user->getId());
+
+        $pagination = $this->paginator->paginate($qb, $page, 10);
+
+        return $pagination;
+    }
+
+
+    public function testQuery(User $user)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->select('p.lastName')
+            ->where('p.lastName = :lastName')
+            ->setParameter('lastName', $user->getLastName());
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

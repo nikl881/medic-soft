@@ -91,6 +91,11 @@ class User implements UserInterface
      */
     private $patients;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $user_id;
+
     public function __construct()
     {
         $this->patients = new ArrayCollection();
@@ -324,5 +329,21 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id): void
+    {
+        $this->user_id = $user_id;
     }
 }
