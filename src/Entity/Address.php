@@ -52,7 +52,10 @@ class Address
      */
     private $user;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity=patient::class, cascade={"persist", "remove"})
+     */
+    private $patient;
 
     public function getId(): ?int
     {
@@ -143,5 +146,16 @@ class Address
         return $this;
     }
 
+    public function getPatient(): ?patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?patient $patient): self
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
 
 }

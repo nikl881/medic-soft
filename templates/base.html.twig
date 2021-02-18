@@ -94,14 +94,17 @@
                 </li>
             </ul>
         </div>
+
         <div class="navbar-right">
+
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".dual-collapse2">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
-                <a class="p-2 text-white ml custom-hidden-text">Logged in as <strong>{{ app.user.name }} {{ app.user.lastname }}</strong></a>
+                <a class="p-2 text-white ml custom-hidden-text">Logged in as
+                    <strong>{{ app.user.name }} {{ app.user.lastname }}</strong></a>
                 <div class="c-avatar">
                     {% if app.user.profileImage == null %}
                         <img class="c-avatar-img table-avatar-img"
@@ -131,13 +134,18 @@
             </ul>
         </div>
     </nav>
+    <div class="c-subheader px-3 d-flex align-items-center custom-bar-color"><i
+                class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
+        <i class="fas fa-clock"></i>&nbsp; {{ "now"|date('H:i', '+01:00 CET') }} </div>
     <div class="c-body">
         <main class="c-main">
             {% block main %}
             {% endblock %}
         </main>
+        <div class="c-footer custom-bar-color"></div>
     </div>
 </div>
+
 </body>
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
