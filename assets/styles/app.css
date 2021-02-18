@@ -24,6 +24,13 @@ body {
         display: none!important;
     }
 }
+
+@media (min-width: 0px) and (max-width: 1024px) {
+    .custom-hidden-text{
+        display: none!important;
+    }
+}
+
 .c-avatar-img{
     width: 40px;
     height: 40px;

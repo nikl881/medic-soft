@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\User;
 use App\Form\UpdateProfileAddressType;
 use App\Form\UpdateProfileImageType;
@@ -33,7 +34,7 @@ class ProfileController extends AbstractController
 
         $profileForm = $this->createForm(UpdateProfileType::class, $user);
         $profileForm->handleRequest($request);
-
+  
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
 
             $this->addFlash('success', 'Profile updated');
@@ -43,16 +44,29 @@ class ProfileController extends AbstractController
         }
 
 
-        $addressForm = $this->createForm(UpdateProfileAddressType::class);
+        $address = $user->getaddress();
+        $addressForm = $this->createForm(UpdateProfileAddressType::class, $address);
         $addressForm->handleRequest($request);
 
-        if ($addressForm->isSubmitted() &&  $addressForm->isValid())
-        {
-            $this->addFlash('success', 'Address updated');
+        if ($addressForm->isSubmitted() && $addressForm->isValid()) {
+            if (!$user->getAddress() instanceof Address) {
+
+                /** @var Address $address */
+                $address = $addressForm->getData();
+
+                $user->setAddress($address);
+                $this->entityManager->persist($address);
+            }
+            $this->addFlash('success', 'Address updated!');
             $this->entityManager->flush();
+
+            if ($request->request->get('redirectUrl')) {
+                return $this->redirect((string)$request->request->get('redirectUrl'));
+            }
 
             return $this->redirectToRoute('profile');
         }
+
 
         $profileImageForm = $this->createForm(UpdateProfileImageType::class, $user);
         $profileImageForm->handleRequest($request);
@@ -70,7 +84,7 @@ class ProfileController extends AbstractController
 
             $user->setProfileImage($combine);
 
-            $this->addFlash('success', 'Profile image updated!');
+            $this->addFlash('success', 'Profile image updated');
             $this->entityManager->flush();
 
         }

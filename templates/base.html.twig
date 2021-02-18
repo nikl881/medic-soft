@@ -68,8 +68,6 @@
                 </li>
             </ul>
         </li>
-
-
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
                 <i class="c-sidebar-nav-icon fas fa-capsules"></i> Medication
@@ -103,6 +101,7 @@
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
+                <a class="p-2 text-white ml custom-hidden-text">Logged in as <strong>{{ app.user.name }} {{ app.user.lastname }}</strong></a>
                 <div class="c-avatar">
                     {% if app.user.profileImage == null %}
                         <img class="c-avatar-img table-avatar-img"
