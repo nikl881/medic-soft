@@ -96,6 +96,12 @@ class User implements UserInterface
      */
     private $user_id;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
+     */
+    private $address;
+
+
     public function __construct()
     {
         $this->patients = new ArrayCollection();
@@ -346,4 +352,18 @@ class User implements UserInterface
     {
         $this->user_id = $user_id;
     }
+
+    public function getAddress(): ?address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+
 }
