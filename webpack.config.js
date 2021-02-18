@@ -8,6 +8,14 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     .setOutputPath('public/build/')
+    .enableVersioning()
+
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[hash:8].[ext]',
+        pattern: /\.(png|jpg|jpeg)$/
+    })
+
     .setPublicPath('/build')
     .addEntry('app', './assets/js/app.js')
     .enableStimulusBridge('./assets/controllers.json')

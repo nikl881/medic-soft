@@ -3,49 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}MedicSoft | {% endblock %}</title>
+
+    <title>{% block title %}MedicSoft | main {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
-<body class="c-app ">
+<body class="c-app">
 <div class="c-sidebar c-sidebar-lg-show" id="sidebar">
-    <a href="/" class="c-sidebar-brand d-md-down-none">
-        <img src="{{ asset('') }}" height="40" alt="MedicSoft logo"/>
+    <a href="/" class="c-sidebar-brand d-md-down-none ">
+        <img src="{{ asset('build/images/medicsoft-menu.png') }}" height="40" alt="main logo">
     </a>
     <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-title text-left">menu</li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Schedule
+            <a class="c-sidebar-nav-link" href="{{ path('index') }}">
+                <i class="c-sidebar-nav-icon fas fa-clock"></i> Schedule
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Patients
-                <span class="badge badge-primary">NEW</span>
+        <li class="c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="c-sidebar-nav-icon fas fa-user"></i> Patients
             </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="{{ path('patient_list_doctor') }}">
+                        My patients
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="{{ path('patient_list_total') }}">
+                        All patients
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Consults
+                <i class="c-sidebar-nav-icon fas fa-heartbeat"></i> Consults
                 <span class="badge badge-primary">NEW</span>
             </a>
+        </li>
+        <li class="c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="c-sidebar-nav-icon fas fa-user-md"></i> Medical Staff
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="#">
+                        Overview
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="{{ path('doctor_list') }}">
+                        List of MD employees
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link " href="#">
+                        Medical support staff
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Doctors
+                <i class="c-sidebar-nav-icon fas fa-capsules"></i> Medication
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cog c-sidebar-nav-icon"></i> Medication
-                <span class="badge badge-primary">NEW</span>
-            </a>
-        </li>
-
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="#">
                 <i class="fas fa-cog c-sidebar-nav-icon"></i> Preferences
@@ -53,48 +81,72 @@
             </a>
         </li>
     </ul>
-    <button class="c-sidebar-minimizer c-brand-minimizer" type="button"></button>
 </div>
 <div class="c-wrapper">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
-                            <i class="fa fa-lg fa-bars text-white"></i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar-right">
-                <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".dual-collapse2">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button"
+                            data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+                        <i class="fa fa-lg fa-bars text-white"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="navbar-right">
+
+            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <a class="p-2 text-white ml custom-hidden-text">Logged in as
+                    <strong>{{ app.user.name }} {{ app.user.lastname }}</strong></a>
+                <div class="c-avatar">
+                    {% if app.user.profileImage == null %}
+                        <img class="c-avatar-img table-avatar-img"
+                             src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                             alt="avatar placeholder">
+                    {% else %}
+                        <img class="c-avatar-img table-avatar-img" src="{{ app.user.profileImage }}" alt="avatar">
+                    {% endif %}
+                </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-expanded="false">
+                        <strong>Account settings</strong>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right pt-0" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div>
+                        <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-user mr-2"></i>
+                            Profile</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i> Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-lock mr-2"></i>Lock
+                            account</a>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}"><i
+                                    class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="c-subheader px-3 d-flex align-items-center custom-bar-color"><i
+                class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
+        <i class="fas fa-clock"></i>&nbsp; {{ "now"|date('H:i', '+01:00 CET') }} </div>
     <div class="c-body">
         <main class="c-main">
             {% block main %}
             {% endblock %}
         </main>
+        <div class="c-footer custom-bar-color"></div>
     </div>
 </div>
 
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
 </body>
-
-
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
