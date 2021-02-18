@@ -69,6 +69,11 @@ class Patient
      */
     private ?User $user;
 
+    /**
+     * @ORM\OneToOne(targetEntity=address::class, cascade={"persist", "remove"})
+     */
+    private $address;
+
 //    /**
 //     * @ORM\OneToOne(targetEntity=Address::class, mappedBy="patient", cascade={"persist", "remove"})
 //     */
@@ -226,6 +231,18 @@ class Patient
 //
 //        return $this;
 //    }
+
+public function getAddress(): ?address
+{
+    return $this->address;
+}
+
+public function setAddress(?address $address): self
+{
+    $this->address = $address;
+
+    return $this;
+}
 
 
 }
