@@ -4,8 +4,15 @@
 
 {% block main %}
     <div class="container">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
-            <h1 class="text-center"><i class="fas fa-user"></i> List of patients - {{ app.user.title }} {{ app.user.lastName }}</h1>
+        <div class="row">
+            <div class="col-10">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
+                    <h1 class="text-center"><i class="fas fa-user"></i> List of patients - {{ app.user.title }} {{ app.user.lastName }}</h1>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="btn btn-success mb-3 float-right"><i class="fas fa-plus"></i> Add patient</div>
+            </div>
         </div>
         <table class="table table-striped border-secondary">
             <thead>

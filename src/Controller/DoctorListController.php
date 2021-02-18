@@ -52,4 +52,6 @@ class DoctorListController extends AbstractController
         return $this->render('doctor/modal/doctor_details_modal.html.twig');
     }
 
+
+
 }

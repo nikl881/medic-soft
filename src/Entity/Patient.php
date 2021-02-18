@@ -65,19 +65,14 @@ class Patient
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="user_id")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
-    private ?User $user;
+    private $user;
 
     /**
      * @ORM\OneToOne(targetEntity=address::class, cascade={"persist", "remove"})
      */
     private $address;
-
-//    /**
-//     * @ORM\OneToOne(targetEntity=Address::class, mappedBy="patient", cascade={"persist", "remove"})
-//     */
-//    private ?Address $address;
 
 
     public function getId(): ?int
