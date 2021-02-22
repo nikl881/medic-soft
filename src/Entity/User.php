@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -73,6 +74,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max="8", min="6")
      */
     private $phoneNumber;
 
@@ -86,10 +88,10 @@ class User implements UserInterface
      */
     private $working;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="primaryDoctor")
-     */
-    private $patients;
+//    /**
+//     * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="primaryDoctor")
+//     */
+//    private $patients;
 
     /**
      * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="user", orphanRemoval=true)

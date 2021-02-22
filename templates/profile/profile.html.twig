@@ -55,27 +55,27 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="fixed-width-120">Street:</div>
-                            <div>{{ app.user.address.street }}</div>
+                            <div>{{ app.user.address.street|default('undefined') }}</div>
                         </div>
                         <div class="d-flex">
                             <div class="fixed-width-120">House number:</div>
-                            <div>{{ app.user.address.houseNumber }}</div>
+                            <div>{{ app.user.address.houseNumber|default('undefined') }}</div>
                         </div>
                         <div class="d-flex">
                             <div class="fixed-width-120">Suffix:</div>
-                            <div>{{ app.user.address.houseNumberSuffix }}</div>
+                            <div>{{ app.user.address.houseNumberSuffix|default('undefined') }}</div>
                         </div>
                         <div class="d-flex">
                             <div class="fixed-width-120">Zipcode:</div>
-                            <div>{{ app.user.address.zipCode }}</div>
+                            <div>{{ app.user.address.zipCode|default('undefined') }}</div>
                         </div>
                         <div class="d-flex">
                             <div class="fixed-width-120">City:</div>
-                            <div>{{ app.user.address.city }}</div>
+                            <div>{{ app.user.address.city|default('undefined') }}</div>
                         </div>
                         <div class="d-flex">
                             <div class="fixed-width-120">Country:</div>
-                            <div>{{ app.user.address.country }}</div>
+                            <div>{{ app.user.address.country|default('undefined') }}</div>
                         </div>
                     </div>
                 </div>

@@ -39,6 +39,8 @@ class PatientListController extends AbstractController
 
             $em->persist($patient);
             $em->flush();
+
+            return $this->redirectToRoute('patient_list_total');
         }
 
         $patients = $this->getDoctrine()
@@ -71,6 +73,8 @@ class PatientListController extends AbstractController
 
             $em->persist($patient);
             $em->flush();
+
+            return $this->redirectToRoute('patient_list_doctor');
         }
 
         $allDoctorIdInPatientList = $this->getDoctrine()

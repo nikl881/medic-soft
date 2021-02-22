@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PatientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PatientRepository::class)
@@ -19,37 +20,45 @@ class Patient
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Valid first name is required")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Valid last name is required")
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Valid birthdate is required")
      */
     private $birthdate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Valid email is required")
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank (message="Please enter a valid insurance number")
+     * @Assert\Length(max="10", min="2")
      */
     private $insuranceNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Valid insurance company name name is required")
+     * @Assert\Length(max="10", min="2")
      */
     private $insuranceCompany;
 
-
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max="8", min="6")
      */
     private $phoneNumber;
 
@@ -65,7 +74,7 @@ class Patient
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="user_id")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 

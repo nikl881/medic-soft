@@ -18,7 +18,7 @@ class Address
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $street;
 
@@ -47,15 +47,6 @@ class Address
      */
     private $country;
 
-    /**
-     * @ORM\OneToOne(targetEntity=user::class, cascade={"persist", "remove"})
-     */
-    private $user;
-
-    /**
-     * @ORM\OneToOne(targetEntity=patient::class, cascade={"persist", "remove"})
-     */
-    private $patient;
 
     public function getId(): ?int
     {
@@ -134,28 +125,5 @@ class Address
         return $this;
     }
 
-    public function getUser(): ?user
-    {
-        return $this->user;
-    }
-
-    public function setUser(?user $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getPatient(): ?patient
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(?patient $patient): self
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
 
 }
