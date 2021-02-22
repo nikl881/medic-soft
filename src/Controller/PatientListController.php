@@ -26,22 +26,16 @@ class PatientListController extends AbstractController
      */
     public function showAllPatientList($page, Request $request): Response
     {
-
         $form = $this->createForm(AddPatientType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-
             $patient = $form->getData();
-
-
             $patient->setdateCreated(new \DateTime());
 
             $this->addFlash('success', 'New patient added');
-
-
 
             $em->persist($patient);
             $em->flush();
@@ -60,9 +54,24 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/list-doctor/{page}",  defaults={"page": 1 }, name="patient_list_doctor")
      */
-    public function showDoctorsPatientList($page): Response
+    public function showDoctorsPatientList($page, Request $request): Response
     {
         $user = $this->getUser();
+
+        $form = $this->createForm(AddPatientType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $patient = $form->getData();
+            $patient->setdateCreated(new \DateTime());
+
+            $this->addFlash('success', 'New patient added');
+
+            $em->persist($patient);
+            $em->flush();
+        }
 
         $allDoctorIdInPatientList = $this->getDoctrine()
             ->getRepository(Patient::class)
@@ -71,8 +80,23 @@ class PatientListController extends AbstractController
 
         return $this->render('patient/patient_list_doctor.html.twig', [
             'patients' => $allDoctorIdInPatientList,
+            'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @Route("/patient/details/{patient}", name="patient_details")
+     */
+    public function patientDetails(Patient $patient)
+    {
+        return $this->render('patient/patient_details.html.twig', [
+            'patient' => $patient,
+        ]);
+
+    }
+
+
 
 
 }
