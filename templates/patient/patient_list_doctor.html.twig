@@ -4,27 +4,37 @@
 
 {% block main %}
     <div class="container">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
-            <h1 class="text-center"><i class="fas fa-user"></i> List of patients - {{ app.user.title }} {{ app.user.lastName }}</h1>
+    <div class="row">
+        <div class="col-10">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
+                <h1 class="text-center"><i class="fas fa-user"></i> List of patients
+                    - {{ app.user.title }} {{ app.user.lastName }}</h1>
+            </div>
         </div>
-        <table class="table table-striped border-secondary">
-            <thead>
-            <tr>
-                <th scope="col">{{ knp_pagination_sortable(patients, 'Name', 'v.name') }} <i
-                            class="fas fa-sort"></i></th>
-                <th scope="col">{{ knp_pagination_sortable(patients, 'Last name', 'v.lastName') }} <i
-                            class="fas fa-sort"></i></th>
-                <th scope="col">Email</th>
-                <th scope="col">Date of birth</th>
-                <th scope="col">Insurance number</th>
-                <th scope="col">Insurance company</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Primary physician</th>
-                <th scope="col">Details</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for patient in patients  %}
+        <div class="col-2">
+            <div class="btn btn-success mb-3 float-right" data-toggle="modal" data-target="#exampleModal1"><i
+                        class="fas fa-plus"></i> Add patient
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped border-secondary">
+        <thead>
+        <tr>
+            <th scope="col">{{ knp_pagination_sortable(patients, 'Name', 'v.name') }} <i
+                        class="fas fa-sort"></i></th>
+            <th scope="col">{{ knp_pagination_sortable(patients, 'Last name', 'v.lastName') }} <i
+                        class="fas fa-sort"></i></th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of birth</th>
+            <th scope="col">Insurance number</th>
+            <th scope="col">Insurance company</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Primary physician</th>
+            <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for patient in patients %}
             <tr>
                 <td>{{ patient.name }}</td>
                 <td>{{ patient.lastName }}</td>
@@ -34,22 +44,43 @@
                 <td>{{ patient.insuranceCompany }}</td>
                 <td>{{ patient.phoneNumber }}</td>
                 <td>{{ patient.user.lastName }}, {{ patient.user.name|first }}</td>
-                <td><i class="fas fa-eye"></i>
+                <td><a href="{{ path('patient_details',{'patient':patient.id}) }}"><i class="fas fa-edit"></i></a></td>
             </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-2">
-                <div class="navigation">
-                    {{ knp_pagination_render(patients) }}
-                </div>
-            </div>
-            <div class="col-9">
-            </div>
-            <div class="col-1">
-                <strong>Total:</strong> <i>{{ patients.getTotalItemCount }}</i>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-2">
+            <div class="navigation">
+                {{ knp_pagination_render(patients) }}
             </div>
         </div>
+        <div class="col-9">
+        </div>
+        <div class="col-1">
+            <strong>Total:</strong> <i>{{ patients.getTotalItemCount }}</i>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user"></i> Add patient
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form(form) }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
