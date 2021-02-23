@@ -4,10 +4,113 @@
 
 {% block main %}
     <div class="container">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
+            <h1><i class="fas fa-user"></i> Patient details</h1>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-2">
+                            {% if patient.profileImage == null %}
+                            <div class="text-center">
+                                <img src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                                     height="100" alt="avatar placeholder">
 
-        <h1>Patient Details</h1>
+                                {% else %}
+                                    <img src="{{ patient.profileImage }}" height="100" alt="profile avatar">
+                                {% endif %}
 
-        {{ patient.lastName }}
+                                <div class="mt-2">
+                                <h4><strong>{{ patient.name }} {{ patient.lastName }} </strong></h4>
+                                    <div class="mb-2">
+                                    <a href="#">
+                                        <button class="btn btn-sm btn-success">Update</button>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-notes-medical"></i> General notes</div>
+                    <div class="card-body">
+                        {{ form(notesForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-info-circle"></i> Information</div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <div class="d-flex">
+                                <div class="fixed-width-120">Name:</div>
+                                <div>{{ patient.name }}</div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="fixed-width-120">Last name:</div>
+                                <div>{{ patient.lastName }}</div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="fixed-width-120">Title:</div>
+                                <div>{{ patient.email }}</div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="fixed-width-120">Phone number:</div>
+                                <div>{{ patient.birthdate|date("d-m-Y") }}</div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="fixed-width-120">Specialty:</div>
+                                <div>{{ patient.phoneNumber }}</div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="fixed-width-120">Location:</div>
+                                <div>{{ patient.insuranceNumber }}</div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="fixed-width-120">MD Licence:</div>
+                                <div>{{ patient.insuranceCompany }}</div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-pills"></i> Medication</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Info</li>
+                            <li>Info</li>
+                            <li>Info</li>
+                            <li>Info</li>
+                            <li>Info</li>
+                            <li>Info</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle"></i> History
+                    </div>
+                    <div class="card-body">
+                        Table
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Repository\PatientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,6 +66,8 @@ class PatientListController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
+
             $em = $this->getDoctrine()->getManager();
             $patient = $form->getData();
             $patient->setdateCreated(new \DateTime());
@@ -92,10 +95,14 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient)
+    public function patientDetails(Patient $patient, Request $request)
     {
+        $notesForm = $this->createForm(AddPatientGeneralNoteType::class);
+        $notesForm->handleRequest($request);
+
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
+            'notesForm' => $notesForm->createView(),
         ]);
 
     }

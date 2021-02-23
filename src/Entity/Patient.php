@@ -83,6 +83,16 @@ class Patient
      */
     private $address;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profileImage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $generalNotes;
+
 
     public function getId(): ?int
     {
@@ -244,6 +254,30 @@ public function getAddress(): ?address
 public function setAddress(?address $address): self
 {
     $this->address = $address;
+
+    return $this;
+}
+
+public function getProfileImage(): ?string
+{
+    return $this->profileImage;
+}
+
+public function setProfileImage(?string $profileImage): self
+{
+    $this->profileImage = $profileImage;
+
+    return $this;
+}
+
+public function getGeneralNotes(): ?string
+{
+    return $this->generalNotes;
+}
+
+public function setGeneralNotes(?string $generalNotes): self
+{
+    $this->generalNotes = $generalNotes;
 
     return $this;
 }
