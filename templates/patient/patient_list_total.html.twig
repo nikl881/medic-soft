@@ -66,6 +66,10 @@
             </div>
         </div>
 
+
+
+
+
         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel"
              aria-hidden="true">
@@ -79,7 +83,16 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {{ form(form) }}
+                        {{ form_start(form) }}
+
+                        {% if not form.phoneNumber.vars.valid %}
+                            <script>
+                                $('#exampleModal1').modal('show');
+                            </script>
+                        {% endif %}
+
+                        {{ form_end(form) }}
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
