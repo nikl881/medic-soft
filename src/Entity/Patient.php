@@ -44,20 +44,21 @@ class Patient
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type(type={"digit"})
      * @Assert\NotBlank (message="Please enter a valid insurance number")
-     * @Assert\Length(max="10", min="2")
+     * @Assert\Length(max="10", min="6")
      */
     private $insuranceNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Valid insurance company name name is required")
-     * @Assert\Length(max="10", min="2")
      */
     private $insuranceCompany;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Type(type={"digit"})
      * @Assert\Length(max="8", min="6")
      */
     private $phoneNumber;
@@ -224,27 +225,6 @@ class Patient
         $this->user = $user;
     }
 
-//    public function getAddress(): ?Address
-//    {
-//        return $this->address;
-//    }
-//
-//    public function setAddress(?Address $address): self
-//    {
-//        // unset the owning side of the relation if necessary
-//        if ($address === null && $this->address !== null) {
-//            $this->address->setPatient(null);
-//        }
-//
-//        // set the owning side of the relation if necessary
-//        if ($address !== null && $address->getPatient() !== $this) {
-//            $address->setPatient($this);
-//        }
-//
-//        $this->address = $address;
-//
-//        return $this;
-//    }
 
 public function getAddress(): ?address
 {
@@ -281,6 +261,5 @@ public function setGeneralNotes(?string $generalNotes): self
 
     return $this;
 }
-
 
 }
