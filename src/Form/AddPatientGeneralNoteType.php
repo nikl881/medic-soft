@@ -3,7 +3,8 @@
 
 namespace App\Form;
 
-use App\Entity\Patient;
+
+use App\Entity\PatientRecordNote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,8 +18,9 @@ class AddPatientGeneralNoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('generalNotes', TextType::class, [
-                'attr' => array('style' => 'height: 100px')
+            ->add('content', TextType::class, [
+                'attr' => array('style' => 'height: 100px'),
+                'data' => 'Add a new note here..',
             ])
             ->add('save', SubmitType::class);
     }
@@ -26,7 +28,7 @@ class AddPatientGeneralNoteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Patient::class,
+            'data_class' => PatientRecordNote::class,
         ]);
     }
 }

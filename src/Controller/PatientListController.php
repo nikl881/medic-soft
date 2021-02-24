@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\PatientRecordNote;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Repository\PatientRepository;
@@ -66,8 +67,6 @@ class PatientListController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
-
             $em = $this->getDoctrine()->getManager();
             $patient = $form->getData();
             $patient->setdateCreated(new \DateTime());
@@ -97,8 +96,21 @@ class PatientListController extends AbstractController
      */
     public function patientDetails(Patient $patient, Request $request)
     {
-        $notesForm = $this->createForm(AddPatientGeneralNoteType::class);
+        $note = new PatientRecordNote();
+
+        $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
         $notesForm->handleRequest($request);
+
+        if ($notesForm->isSubmitted() && $notesForm->isValid())
+        {
+            $note = $notesForm->getData();
+            $note->setcreatedAt(new \DateTime());
+            $note->setpatient($patient);
+
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->persist($note);
+             $entityManager->flush();
+        }
 
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
@@ -106,8 +118,5 @@ class PatientListController extends AbstractController
         ]);
 
     }
-
-
-
 
 }

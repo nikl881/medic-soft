@@ -4,69 +4,69 @@
 
 {% block main %}
     <div class="container">
-        <div class="row">
-            <div class="col-10">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
-                    <h1 class="text-center"><i class="fas fa-user"></i> List of all patients </h1>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="btn btn-success mb-3 float-right" data-toggle="modal" data-target="#exampleModal1"><i
-                            class="fas fa-plus"></i> Add patient
-                </div>
+    <div class="row">
+        <div class="col-10">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
+                <h1 class="text-center"><i class="fas fa-user"></i> List of all patients </h1>
             </div>
         </div>
-        <table class="table table-striped border-secondary">
-            <thead>
+        <div class="col-2">
+            <div class="btn btn-success mb-3 float-right" data-toggle="modal" data-target="#patientModal"><i
+                        class="fas fa-plus"></i> Add patient
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped border-secondary">
+        <thead>
+        <tr>
+            <th scope="col">{{ knp_pagination_sortable(patients, 'Name', 'v.name') }} <i
+                        class="fas fa-sort"></i></th>
+            <th scope="col">{{ knp_pagination_sortable(patients, 'Last name', 'v.lastName') }} <i
+                        class="fas fa-sort"></i></th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of birth</th>
+            <th scope="col">Insurance number</th>
+            <th scope="col">Insurance company</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Primary physician</th>
+            <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for patient in patients %}
             <tr>
-                <th scope="col">{{ knp_pagination_sortable(patients, 'Name', 'v.name') }} <i
-                            class="fas fa-sort"></i></th>
-                <th scope="col">{{ knp_pagination_sortable(patients, 'Last name', 'v.lastName') }} <i
-                            class="fas fa-sort"></i></th>
-                <th scope="col">Email</th>
-                <th scope="col">Date of birth</th>
-                <th scope="col">Insurance number</th>
-                <th scope="col">Insurance company</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Primary physician</th>
-                <th scope="col">Details</th>
+                <td>{{ patient.name }}</td>
+                <td>{{ patient.lastName }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.birthdate|date("d-m-Y") }}</td>
+                <td>{{ patient.insuranceNumber }}</td>
+                <td>{{ patient.insuranceCompany }}</td>
+                <td>{{ patient.phoneNumber }}</td>
+                {% if patient.user.lastName is defined %}
+                    <td>{{ patient.user.lastName }}, {{ patient.user.name|first }}</td>
+                {% else %}
+                    <td>Not assigned</td>
+                {% endif %}
+                <td><a href="{{ path('patient_details',{'patient':patient.id}) }}"><i class="fas fa-edit"></i></a>
+                </td>
             </tr>
-            </thead>
-            <tbody>
-            {% for patient in patients %}
-                <tr>
-                    <td>{{ patient.name }}</td>
-                    <td>{{ patient.lastName }}</td>
-                    <td>{{ patient.email }}</td>
-                    <td>{{ patient.birthdate|date("d-m-Y") }}</td>
-                    <td>{{ patient.insuranceNumber }}</td>
-                    <td>{{ patient.insuranceCompany }}</td>
-                    <td>{{ patient.phoneNumber }}</td>
-                    {% if patient.user.lastName is defined %}
-                        <td>{{ patient.user.lastName }}, {{ patient.user.name|first }}</td>
-                    {% else %}
-                        <td>Not assigned</td>
-                    {% endif %}
-                    <td><a href="{{ path('patient_details',{'patient':patient.id}) }}"><i class="fas fa-edit"></i></a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-2">
-                <div class="navigation">
-                    {{ knp_pagination_render(patients) }}
-                </div>
-            </div>
-            <div class="col-9">
-            </div>
-            <div class="col-1">
-                <strong>Total:</strong> <i>{{ patients.getTotalItemCount }}</i>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-2">
+            <div class="navigation">
+                {{ knp_pagination_render(patients) }}
             </div>
         </div>
+        <div class="col-9">
+        </div>
+        <div class="col-1">
+            <strong>Total:</strong> <i>{{ patients.getTotalItemCount }}</i>
+        </div>
+    </div>
 
-
+    {% block customjavascripts %}
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script>
@@ -74,8 +74,7 @@
                 $('#basicExampleModal').modal('show');
             });
         </script>
-
-        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog">
+        <div class="modal fade" id="patientModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">Modal</div>
@@ -84,7 +83,7 @@
                         {% if not form.vars.valid %}
                             <script type="text/javascript">
                                 $(window).on('load', function () {
-                                    $('#exampleModal1').modal('show');
+                                    $('#patientModal').modal('show');
                                 });
                             </script>
                         {% endif %}
@@ -93,5 +92,6 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+    {% endblock %}
 {% endblock %}

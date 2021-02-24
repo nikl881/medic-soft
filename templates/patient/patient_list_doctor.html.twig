@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="col-2">
-            <div class="btn btn-success mb-3 float-right" data-toggle="modal" data-target="#exampleModal1"><i
+            <div class="btn btn-success mb-3 float-right" data-toggle="modal" data-target="#patientModal"><i
                         class="fas fa-plus"></i> Add patient
             </div>
         </div>
@@ -61,106 +61,33 @@
             <strong>Total:</strong> <i>{{ patients.getTotalItemCount }}</i>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user"></i> Add patient
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(form) }}
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="myclass">Save</button>
+
+    {% block customjavascripts %}
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script>
+            $(function () {
+                $('#basicExampleModal').modal('show');
+            });
+        </script>
+        <div class="modal fade" id="patientModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">Modal</div>
+                    <div class="modal-body">
+                        {{ form_start(form) }}
+                        {% if not form.vars.valid %}
+                            <script type="text/javascript">
+                                $(window).on('load', function () {
+                                    $('#patientModal').modal('show');
+                                });
+                            </script>
+                        {% endif %}
+                        {{ form_end(form) }}
                     </div>
-                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
-    </div>
-
-
-{#    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addMyModal">Open Modal</button>#}
-{#    <div class="modal fade" id="addMyModal" role="dialog">#}
-{#        <div class="modal-dialog">#}
-{#            <div class="modal-content">#}
-{#                <div class="modal-header">#}
-{#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
-{#                    <h4 class="modal-title">Add patient</h4>#}
-{#                </div>#}
-{#                <div class="modal-body">#}
-
-{#                    <form role="form" id="newModalForm">#}
-{#                        <div class="form-group">#}
-
-
-
-{#                            <label class="control-label col-md-3" for="email">Last name:</label>#}
-{#                            <div class="col-md-9">#}
-{#                                <input type="text" class="form-control" id="pName" name="pName"#}
-{#                                       placeholder="Enter patient name" require/>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label class="control-label col-md-3" for="email">Last name:</label>#}
-{#                            <div class="col-md-9">#}
-{#                                <input type="text" class="form-control" id="action" name="action"#}
-{#                                       placeholder="Enter patient name" require>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        #}
-{#                        #}
-{#                        #}
-{#                        <div class="modal-footer">#}
-{#                            <button type="submit" class="btn btn-success" id="btnSaveIt">Save</button>#}
-{#                            <button type="button" class="btn btn-default" id="btnCloseIt" data-dismiss="modal">Close#}
-{#                            </button>#}
-{#                        </div>#}
-
-{#                    </form>#}
-
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-
-    {% block customjavascripts %}
-        <script>
-
-            $('.myclass li.active .short-text:contains("someText")').click();
-
-        </script>
-        {% endblock %}
-
-
-{#    {% block customjavascripts %}#}
-{#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>#}
-{#        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>#}
-{#        <script>#}
-{#            $(function () {#}
-{#                $("#newModalForm").validate({#}
-{#                    rules: {#}
-{#                        pName: {#}
-{#                            required: true,#}
-{#                            minlength: 8#}
-{#                        },#}
-{#                        action: "required"#}
-{#                    },#}
-{#                    messages: {#}
-{#                        pName: {#}
-{#                            required: "Please enter some data",#}
-{#                            minlength: "Your data must be at least 8 characters"#}
-{#                        },#}
-{#                        action: "Please provide some data"#}
-{#                    }#}
-{#                });#}
-{#            });#}
-{#        </script>#}
-{#    {% endblock %}#}
+        </div>
+    {% endblock %}
 {% endblock %}
