@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -89,10 +91,16 @@ class Patient
      */
     private $profileImage;
 
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity=PatientRecordNote::class, mappedBy="patient")
      */
-    private $generalNotes;
+    private $patientRecordNote;
+
+    public function __construct()
+    {
+        $this->patientRecordNote = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -250,14 +258,33 @@ public function setProfileImage(?string $profileImage): self
     return $this;
 }
 
-public function getGeneralNotes(): ?string
+
+/**
+ * @return Collection|PatientRecordNote[]
+ */
+public function getPatientRecordNotes(): Collection
 {
-    return $this->generalNotes;
+    return $this->patientRecordNotes;
 }
 
-public function setGeneralNotes(?string $generalNotes): self
+public function addPatientRecordNote(PatientRecordNote $patientRecordNote): self
 {
-    $this->generalNotes = $generalNotes;
+    if (!$this->patientRecordNote->contains($patientRecordNote)) {
+        $this->patientRecordNote[] = $patientRecordNote;
+        $patientRecordNote->setPatient($this);
+    }
+
+    return $this;
+}
+
+public function removePatientRecordNote(PatientRecordNote $patientRecordNote): self
+{
+    if ($this->patientRecordNote->removeElement($patientRecordNote)) {
+        // set the owning side to null (unless already changed)
+        if ($patientRecordNote->getPatient() === $this) {
+            $patientRecordNote->setPatient(null);
+        }
+    }
 
     return $this;
 }

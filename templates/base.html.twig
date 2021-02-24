@@ -136,7 +136,8 @@
     </nav>
     <div class="c-subheader px-3 d-flex align-items-center custom-bar-color"><i
                 class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
-        <i class="fas fa-clock"></i>&nbsp; {{ "now"|date('H:i', '+01:00 CET') }} </div>
+        <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>
+    </div>
     <div class="c-body">
         <main class="c-main">
             {% block main %}
@@ -148,6 +149,19 @@
 
 </body>
 {% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var interval = setInterval(function() {
+                var momentNow = moment();
+                $('#date-part').html(momentNow.format('YYYY MMMM DD') + ' '
+                    + momentNow.format('dddd')
+                        .substring(0,3).toUpperCase());
+                $('#time-part').html(momentNow.format('A hh:mm:ss'));
+            }, 100);
+        });
+    </script>
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </html>

@@ -59,23 +59,23 @@
                                 <div>{{ patient.lastName }}</div>
                             </div>
                             <div class="d-flex">
-                                <div class="fixed-width-120">Title:</div>
+                                <div class="fixed-width-120">Email:</div>
                                 <div>{{ patient.email }}</div>
                             </div>
                             <div class="d-flex">
-                                <div class="fixed-width-120">Phone number:</div>
+                                <div class="fixed-width-120">Birthdate:</div>
                                 <div>{{ patient.birthdate|date("d-m-Y") }}</div>
                             </div>
                             <div class="d-flex">
-                                <div class="fixed-width-120">Specialty:</div>
+                                <div class="fixed-width-120">Phonenumber:</div>
                                 <div>{{ patient.phoneNumber }}</div>
                             </div>
                             <div class="d-flex">
-                                <div class="fixed-width-120">Location:</div>
+                                <div class="fixed-width-120">Insurance No:</div>
                                 <div>{{ patient.insuranceNumber }}</div>
                             </div>
                             <div class="d-flex">
-                                <div class="fixed-width-120">MD Licence:</div>
+                                <div class="fixed-width-120">Insurance Co:</div>
                                 <div>{{ patient.insuranceCompany }}</div>
                             </div>
                         </ul>
@@ -103,7 +103,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fas fa-info-circle"></i> History
+                        <i class="fas fa-clock"></i> Treatment history
                     </div>
                     <div class="card-body">
                         Table
@@ -111,6 +111,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 {% endblock %}
