@@ -20,7 +20,7 @@ class AddPatientGeneralNoteType extends AbstractType
         $builder
             ->add('content', TextType::class, [
                 'attr' => array('style' => 'height: 130px'),
-                'data' => 'Add a new note here..',
+              'data' => 'Add a new note here..',
                 'label' => false,
             ])
             ->add('save', SubmitType::class);

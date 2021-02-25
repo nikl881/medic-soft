@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
-use App\Entity\PatientRecordNote;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Repository\PatientRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +17,15 @@ class PatientListController extends AbstractController
 {
 
     private PatientRepository $patientRepository;
+    /**
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(PatientRepository $patientRepository)
+    public function __construct(PatientRepository $patientRepository, EntityManagerInterface $entityManager)
     {
         $this->patientRepository = $patientRepository;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -94,9 +99,11 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient, Request $request)
+    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager)
     {
-        $note = new PatientRecordNote();
+
+
+        $note = $patient->getPatientRecordNote();
 
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
         $notesForm->handleRequest($request);
@@ -105,10 +112,12 @@ class PatientListController extends AbstractController
         {
 
             $note = $notesForm->getData();
-            $note->setcreatedAt(new \DateTime());
-            $note->setpatient($patient);
 
-             $entityManager = $this->getDoctrine()->getManager();
+            $patient->setPatientRecordNote($note);
+
+            $this->addFlash('success', 'Note added!');
+            $note->setcreatedAt(new \DateTime());
+
              $entityManager->persist($note);
              $entityManager->flush();
         }
