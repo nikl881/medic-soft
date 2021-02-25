@@ -88,10 +88,6 @@ class User implements UserInterface
      */
     private $working;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="primaryDoctor")
-//     */
-//    private $patients;
 
     /**
      * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="user", orphanRemoval=true)

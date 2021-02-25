@@ -53,6 +53,12 @@ class PatientFixtures extends Fixture
             ['Marienna', 'Smitse', new \DateTime() , "mariennasmitse@mail.com", 322354, 'Zilverenkruis', "06-2145667"],
             ['Madelon', 'Goud', new \DateTime() , "madelongoud@mail.com", 122354, 'Agis', "06-4445667"],
             ['Fransica', 'Kraam', new \DateTime() , "fransicakraam@mail.com", 462354, 'Mensis', "06-7745667"],
+
+            ['Jim', 'Bean', new \DateTime()  , "jimbeam@mail.com", 122354, 'Achmea', "06-9345667"],
+            ['Roger', 'Federer', new \DateTime()  , "rogerfederer@mail.com", 222354, 'Achmea', "06-1345667"],
+            ['Rafael', 'Nadal', new \DateTime() , "rafaelnadal@mail.com", 522354, 'Zilverenkruis', "06-9145667"],
+            ['Willam', 'Tsjonga', new \DateTime() , "willamtsjonga@mail.com", 622354, 'Agis', "06-0445667"],
+            ['Mitchel', 'Rombouts', new \DateTime() , "mitchelrombouts@mail.com", 762354, 'Mensis', "06-5745667"],
         ];
     }
 }

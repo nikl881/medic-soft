@@ -91,16 +91,10 @@ class Patient
      */
     private $profileImage;
 
-
     /**
-     * @ORM\OneToMany(targetEntity=PatientRecordNote::class, mappedBy="patient")
+     * @ORM\OneToOne(targetEntity=PatientRecordNote::class, cascade={"persist", "remove"})
      */
     private $patientRecordNote;
-
-    public function __construct()
-    {
-        $this->patientRecordNote = new ArrayCollection();
-    }
 
 
     public function getId(): ?int
@@ -258,33 +252,14 @@ public function setProfileImage(?string $profileImage): self
     return $this;
 }
 
-
-/**
- * @return Collection|PatientRecordNote[]
- */
-public function getPatientRecordNotes(): Collection
+public function getPatientRecordNote(): ?PatientRecordNote
 {
-    return $this->patientRecordNotes;
+    return $this->patientRecordNote;
 }
 
-public function addPatientRecordNote(PatientRecordNote $patientRecordNote): self
+public function setPatientRecordNote(?PatientRecordNote $patientRecordNote): self
 {
-    if (!$this->patientRecordNote->contains($patientRecordNote)) {
-        $this->patientRecordNote[] = $patientRecordNote;
-        $patientRecordNote->setPatient($this);
-    }
-
-    return $this;
-}
-
-public function removePatientRecordNote(PatientRecordNote $patientRecordNote): self
-{
-    if ($this->patientRecordNote->removeElement($patientRecordNote)) {
-        // set the owning side to null (unless already changed)
-        if ($patientRecordNote->getPatient() === $this) {
-            $patientRecordNote->setPatient(null);
-        }
-    }
+    $this->patientRecordNote = $patientRecordNote;
 
     return $this;
 }
