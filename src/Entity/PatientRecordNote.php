@@ -27,10 +27,6 @@ class PatientRecordNote
      */
     private $created_at;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=patient::class, inversedBy="patientRecordNote")
-     */
-    private $patient;
 
     public function getId(): ?int
     {
@@ -61,15 +57,4 @@ class PatientRecordNote
         return $this;
     }
 
-    public function getPatient(): ?patient
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(?patient $patient): self
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
 }

@@ -103,6 +103,7 @@ class PatientListController extends AbstractController
 
         if ($notesForm->isSubmitted() && $notesForm->isValid())
         {
+
             $note = $notesForm->getData();
             $note->setcreatedAt(new \DateTime());
             $note->setpatient($patient);
