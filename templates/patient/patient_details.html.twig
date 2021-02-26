@@ -22,27 +22,6 @@
             <div class="col-sm-6 col-lg-4">
                 <div class="card d-flex">
                     <div class="card-body">
-
-
-{#                        <div class="card-body">#}
-{#                            <div class="mb-2">#}
-{#                                {% if app.user.profileImage == null %}#}
-{#                                    <img src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"#}
-{#                                         height="100" alt="avatar placeholder">#}
-{#                                {% else %}#}
-{#                                    <img src="{{ app.user.profileImage }}" height="100" alt="profile avatar">#}
-{#                                {% endif %}#}
-{#                            </div>#}
-{#                            {{ form_start(userProfileForm) }}#}
-{#                            {{ form_row(userProfileForm.profileImage) }}#}
-{#                            <div class="card-footer">#}
-{#                                {{ form_row(userProfileForm.save) }}#}
-{#                            </div>#}
-{#                            {{ form_end(userProfileForm) }}#}
-{#                        </div>#}
-
-
-
                         <div class="mb-3">
                             {% if patient.profileImage == null %}
                             <div class="text-center">
@@ -73,12 +52,12 @@
             <div class="col-sm-4 col-lg-8">
                 <div class="card">
                     <div class="row">
-                        <div class="col-6">
-                            {% if patient.patientRecordNotes %}
+                        <div class="col-8">
+                            {% if patient.patientRecordNotes is not null %}
                                 <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i
                                             class="fas fa-exclamation-triangle text-danger"></i></div>
                             {% else %}
-                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General  </div>
+                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General</div>
                             {% endif %}
                             <div class="card-body">
                                 {{ form_start(notesForm) }}
@@ -89,39 +68,33 @@
                                 {{ form_end(notesForm) }}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="card-header border-0 text-white">hidden header</div>
                             <div class="card-body">
-                            <div class="accordion" id="accordion" role="tablist">
-                                <div class="card mb-0">
-                                    <div class="card-header" id="headingOne" role="tab">
-                                        <div class="mb-0"><a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed text-dark"><i class="fas fa-clipboard"></i> Note 1</a></div>
-                                    </div>
-                                    <div class="collapse" id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
-                                        <div class="card-body">{{ dump(patient.patientRecordNotes) }}</div>
-                                    </div>
-                                </div>
-                                <div class="card mb-0">
-                                    <div class="card-header" id="headingTwo" role="tab">
-                                        <div class="mb-0"><a class="text-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><i class="fas fa-clipboard"></i> Note 2</a></div>
-                                    </div>
-                                    <div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion" style="">
-                                        <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
-                                    </div>
-                                </div>
-                                <div class="card mb-0">
-                                    <div class="card-header" id="headingThree" role="tab">
-                                        <div class="mb-0"><a class="collapsed text-dark" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fas fa-clipboard"></i> Note 3</a></div>
-                                    </div>
-                                    <div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion" style="">
-                                        <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
+                                <div class="accordion" id="accordion" role="tablist">
+                                    <div class="card mb-0">
+                                        <div class="card-header" id="headingOne" role="tab">
+                                            <div class="mb-0"><a data-toggle="collapse" href="#collapseOne"
+                                                                 aria-expanded="false" aria-controls="collapseOne"
+                                                                 class="collapsed text-dark"><i
+                                                            class="fas fa-clipboard"></i> History</a></div>
+                                        </div>
+                                        <div class="collapse" id="collapseOne" role="tabpanel"
+                                             aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                            <div class="card-body">
+                                                {% for notes in allPatientNotes %}
+                                                <ul class="list-group border-0">
+                                                    <li class="list-group-item mb-1">{{ notes|join(', ') }} <a href="#"><i
+                                                                    class="fas fa-trash text-danger"></i></a></li>
+                                                    {% endfor %}
+                                                    <li class="list-group-item mb-1"><a href="#">Show all results</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>

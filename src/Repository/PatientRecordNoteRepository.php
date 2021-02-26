@@ -19,32 +19,15 @@ class PatientRecordNoteRepository extends ServiceEntityRepository
         parent::__construct($registry, PatientRecordNote::class);
     }
 
-    // /**
-    //  * @return PatientRecordNote[] Returns an array of PatientRecordNote objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function testQuery(PatientRecordNote $note)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('p');
 
-    /*
-    public function findOneBySomeField($value): ?PatientRecordNote
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb->select('p.content')
+            ->orderBy('p.created_at', 'DESC')
+            ->setMaxResults(5);
+
+        return $qb->getQuery()->getResult();
     }
-    */
+
 }

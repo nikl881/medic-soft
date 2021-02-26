@@ -100,7 +100,7 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager)
+    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, PatientRecordNote $note)
     {
         $note = new PatientRecordNote();
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
@@ -118,9 +118,15 @@ class PatientListController extends AbstractController
              $entityManager->flush();
         }
 
+        $getQuery = $this->getDoctrine()
+            ->getRepository(PatientRecordNote::class)
+            ->testQuery($note);
+
+
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
             'notesForm' => $notesForm->createView(),
+            'allPatientNotes' => $getQuery,
         ]);
 
     }
