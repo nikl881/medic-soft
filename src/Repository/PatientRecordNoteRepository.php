@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Patient;
 use App\Entity\PatientRecordNote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,12 +20,14 @@ class PatientRecordNoteRepository extends ServiceEntityRepository
         parent::__construct($registry, PatientRecordNote::class);
     }
 
-    public function testQuery(PatientRecordNote $note)
+    public function testQuery(PatientRecordNote $note, Patient $patient)
     {
         $qb = $this->createQueryBuilder('p');
 
         $qb->select('p.title')
             ->orderBy('p.created_at', 'DESC')
+            ->where('p.patient = :patientId')
+            ->setParameter('patientId', $patient->getId())
             ->setMaxResults(3);
 
         return $qb->getQuery()->getResult();

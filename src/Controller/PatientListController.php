@@ -120,7 +120,8 @@ class PatientListController extends AbstractController
 
         $getQuery = $this->getDoctrine()
             ->getRepository(PatientRecordNote::class)
-            ->testQuery($note);
+            ->testQuery($note, $patient);
+
 
 
         return $this->render('patient/patient_details.html.twig', [
