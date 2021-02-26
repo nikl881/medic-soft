@@ -23,9 +23,9 @@ class PatientRecordNoteRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('p');
 
-        $qb->select('p.content')
+        $qb->select('p.title')
             ->orderBy('p.created_at', 'DESC')
-            ->setMaxResults(5);
+            ->setMaxResults(3);
 
         return $qb->getQuery()->getResult();
     }

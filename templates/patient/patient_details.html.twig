@@ -41,11 +41,7 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-                    <div class="card-footer border-0">
-
                     </div>
                 </div>
             </div>
@@ -57,10 +53,13 @@
                                 <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i
                                             class="fas fa-exclamation-triangle text-danger"></i></div>
                             {% else %}
-                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General</div>
+                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes</div>
                             {% endif %}
                             <div class="card-body">
                                 {{ form_start(notesForm) }}
+                                <div class="mb-2">
+                                    {{ form_widget(notesForm.title) }}
+                                </div>
                                 {{ form_widget(notesForm.content) }}
                             </div>
                             <div class="card-footer border-0">
@@ -73,18 +72,19 @@
                             <div class="card-body">
                                 <div class="accordion" id="accordion" role="tablist">
                                     <div class="card mb-0">
-                                        <div class="card-header" id="headingOne" role="tab">
-                                            <div class="mb-0"><a data-toggle="collapse" href="#collapseOne"
-                                                                 aria-expanded="false" aria-controls="collapseOne"
-                                                                 class="collapsed text-dark"><i
-                                                            class="fas fa-clipboard"></i> History</a></div>
+                                        <div class="card-header border-0" id="headingOne" role="tab">
+                                            <div class="mb-0 text-center"><a data-toggle="collapse" href="#collapseOne"
+                                                                             aria-expanded="false"
+                                                                             aria-controls="collapseOne"
+                                                                             class="collapsed text-dark"><i class="fas fa-arrow-alt-circle-down"></i> History</a></div>
                                         </div>
                                         <div class="collapse" id="collapseOne" role="tabpanel"
                                              aria-labelledby="headingOne" data-parent="#accordion" style="">
                                             <div class="card-body">
                                                 {% for notes in allPatientNotes %}
                                                 <ul class="list-group border-0">
-                                                    <li class="list-group-item mb-1">{{ notes|join(', ') }} <a href="#"><i
+                                                    <li class="list-group-item mb-1 d-flex justify-content-between"><a
+                                                                href="#">{{ notes|join(', ') }}</a> <a href="#"><i
                                                                     class="fas fa-trash text-danger"></i></a></li>
                                                     {% endfor %}
                                                     <li class="list-group-item mb-1"><a href="#">Show all results</a>
@@ -136,9 +136,7 @@
                             </div>
                         </ul>
                     </div>
-                    <div class="card-footer border-0">
 
-                    </div>
                 </div>
             </div>
             <div class="col-sm-4 col-lg-8">
@@ -169,6 +167,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-sm btn-dark float-right">Show all</button>
                     </div>
                 </div>
             </div>
@@ -221,6 +220,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-sm btn-dark float-right">Show all</button>
                     </div>
                 </div>
             </div>
