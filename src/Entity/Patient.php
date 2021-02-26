@@ -248,7 +248,7 @@ public function getPatientRecordNotes(): Collection
     return $this->patientRecordNotes;
 }
 
-public function addPatientRecordNote(PatientRecordNote $patientRecordNote): self
+public function addPatientRecordNote(?PatientRecordNote $patientRecordNote): self
 {
     if (!$this->patientRecordNotes->contains($patientRecordNote)) {
         $this->patientRecordNotes[] = $patientRecordNote;
@@ -258,7 +258,7 @@ public function addPatientRecordNote(PatientRecordNote $patientRecordNote): self
     return $this;
 }
 
-public function removePatientRecordNote(PatientRecordNote $patientRecordNote): self
+public function removePatientRecordNote(?PatientRecordNote $patientRecordNote): self
 {
     if ($this->patientRecordNotes->removeElement($patientRecordNote)) {
         // set the owning side to null (unless already changed)

@@ -100,7 +100,7 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, PatientRecordNote $note)
+    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager)
     {
         $note = new PatientRecordNote();
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
