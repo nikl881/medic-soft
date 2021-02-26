@@ -118,9 +118,16 @@ class PatientListController extends AbstractController
              $entityManager->flush();
         }
 
+        $getQuery = $this->getDoctrine()
+            ->getRepository(PatientRecordNote::class)
+            ->testQuery($note, $patient);
+
+
+
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
             'notesForm' => $notesForm->createView(),
+            'allPatientNotes' => $getQuery,
         ]);
 
     }

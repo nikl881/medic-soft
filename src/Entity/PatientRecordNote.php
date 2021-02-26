@@ -32,6 +32,11 @@ class PatientRecordNote
      */
     private $patient;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
 
     public function getId(): ?int
     {
@@ -70,6 +75,18 @@ class PatientRecordNote
     public function setPatient(?Patient $patient): self
     {
         $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

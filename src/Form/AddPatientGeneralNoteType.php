@@ -17,8 +17,11 @@ class AddPatientGeneralNoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('title', TextType::class, [
+                'data' => 'Title..',
+            ])
             ->add('content', TextType::class, [
-                'attr' => array('style' => 'height: 130px'),
+                'attr' => array('style' => 'height: 70px'),
                  'data' => 'Add a new note here..',
                 'label' => false,
             ])
