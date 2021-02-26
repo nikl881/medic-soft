@@ -23,9 +23,14 @@ class PatientRecordNote
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="patientRecordNotes")
+     */
+    private $patient;
 
 
     public function getId(): ?int
@@ -53,6 +58,18 @@ class PatientRecordNote
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?Patient $patient): self
+    {
+        $this->patient = $patient;
 
         return $this;
     }

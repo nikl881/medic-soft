@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\PatientRecordNote;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Repository\PatientRepository;
@@ -101,19 +102,14 @@ class PatientListController extends AbstractController
      */
     public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager)
     {
-
-
-        $note = $patient->getPatientRecordNote();
-
+        $note = new PatientRecordNote();
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
         $notesForm->handleRequest($request);
 
         if ($notesForm->isSubmitted() && $notesForm->isValid())
         {
-
             $note = $notesForm->getData();
-
-            $patient->setPatientRecordNote($note);
+            $note->setpatient($patient);
 
             $this->addFlash('success', 'Note added!');
             $note->setcreatedAt(new \DateTime());
