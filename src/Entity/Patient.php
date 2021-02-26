@@ -70,10 +70,6 @@ class Patient
      */
     private $dateCreated;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $primaryDoctorId;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="user_id")
@@ -92,9 +88,14 @@ class Patient
     private $profileImage;
 
     /**
-     * @ORM\OneToOne(targetEntity=PatientRecordNote::class, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=PatientRecordNote::class, mappedBy="patient")
      */
-    private $patientRecordNote;
+    private $patientRecordNotes;
+
+    public function __construct()
+    {
+        $this->patientRecordNotes = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -203,19 +204,6 @@ class Patient
         $this->birthdate = $birthdate;
     }
 
-    public function getPrimaryDoctorId(): ?int
-    {
-        return $this->primaryDoctorId;
-    }
-
-    public function setPrimaryDoctorId(?int $primaryDoctorId): self
-    {
-        $this->primaryDoctorId = $primaryDoctorId;
-
-        return $this;
-    }
-
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -252,14 +240,32 @@ public function setProfileImage(?string $profileImage): self
     return $this;
 }
 
-public function getPatientRecordNote(): ?PatientRecordNote
+/**
+ * @return Collection|PatientRecordNote[]
+ */
+public function getPatientRecordNotes(): Collection
 {
-    return $this->patientRecordNote;
+    return $this->patientRecordNotes;
 }
 
-public function setPatientRecordNote(?PatientRecordNote $patientRecordNote): self
+public function addPatientRecordNote(PatientRecordNote $patientRecordNote): self
 {
-    $this->patientRecordNote = $patientRecordNote;
+    if (!$this->patientRecordNotes->contains($patientRecordNote)) {
+        $this->patientRecordNotes[] = $patientRecordNote;
+        $patientRecordNote->setPatient($this);
+    }
+
+    return $this;
+}
+
+public function removePatientRecordNote(PatientRecordNote $patientRecordNote): self
+{
+    if ($this->patientRecordNotes->removeElement($patientRecordNote)) {
+        // set the owning side to null (unless already changed)
+        if ($patientRecordNote->getPatient() === $this) {
+            $patientRecordNote->setPatient(null);
+        }
+    }
 
     return $this;
 }
