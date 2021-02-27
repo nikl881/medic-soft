@@ -92,7 +92,7 @@
                                                     </li>
                                                     {% endfor %}
                                                     {% if allPatientNotes %}
-                                                        <li class="list-group-item mb-1"><a href="#">Show all
+                                                        <li class="list-group-item mb-1"><a href="{{ path('patient_notes_list',{'patient':patient.id}) }}">Show all
                                                                 results..</a>
                                                         </li>
                                                     {% else %}
