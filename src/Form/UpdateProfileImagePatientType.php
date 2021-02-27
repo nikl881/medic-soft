@@ -15,15 +15,15 @@ class UpdateProfileImagePatientType extends AbstractType
     {
         $builder
             ->add('profileImage', FileType::class, [
-                'label' => 'Profile image', 'mapped' => false, 'required' => false, 'constraints' =>
+                'label' => false , 'mapped' => false, 'required' => false, 'constraints' =>
                     new File([
                         'maxSize' => '5m',
                         'mimeTypes' => [
                             'image/*',
                         ],
                     ])
-            ])
-            ->add('save', SubmitType::class);
+            ]);
+
     }
 
 }

@@ -23,28 +23,22 @@
                 <div class="card d-flex">
                     <div class="card-body">
                         <div class="mb-3">
-                            {% if patient.profileImage == null %}
                             <div class="text-center">
-                                <img src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
-                                     height="120" alt="avatar placeholder">
+                                {% if patient.profileImage == null %}
+                                    <img class="rounded" src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                                         height="100" alt="avatar placeholder">
                                 {% else %}
-                                    <img src="{{ patient.profileImage }}" height="100" alt="profile avatar">
+                                    <img class="rounded" src="{{ patient.profileImage }}" height="100" alt="profile avatar">
                                 {% endif %}
-
                                 <div class="mt-4">
                                     <h4><strong>{{ patient.name }} {{ patient.lastName }} </strong></h4>
-                                    <div class="mb-3 mt-2">
-                                        <a href="#">
-                                            <button class="btn btn-sm btn-success">Update</button>
-                                        </a>
-                                    </div>
                                 </div>
+                            </div>
                                 {{ form_start(patientProfileForm) }}
                                 {{ form_row(patientProfileForm.profileImage) }}
-                                {{ form_row(patientProfileForm.save) }}
+                            <button class="btn btn-sm btn-success">Update</button>
                                 {{ form_end(patientProfileForm) }}
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -72,7 +66,6 @@
                             </div>
                         </div>
                         <div class="col-4">
-
                             <div class="card-header border-0 text-white">hidden header</div>
                             <div class="card-body">
                                 <div class="accordion" id="accordion" role="tablist">
@@ -148,7 +141,6 @@
                             </div>
                         </ul>
                     </div>
-
                 </div>
             </div>
             <div class="col-sm-4 col-lg-8">
