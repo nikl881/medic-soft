@@ -23,24 +23,23 @@
                 <div class="card d-flex">
                     <div class="card-body">
                         <div class="mb-3">
-                            {% if patient.profileImage == null %}
                             <div class="text-center">
-                                <img src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
-                                     height="120" alt="avatar placeholder">
-
+                                {% if patient.profileImage == null %}
+                                    <img class="rounded"
+                                         src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                                         height="100" alt="avatar placeholder">
                                 {% else %}
-                                    <img src="{{ patient.profileImage }}" height="100" alt="profile avatar">
+                                    <img class="rounded" src="{{ patient.profileImage }}" height="100"
+                                         alt="profile avatar">
                                 {% endif %}
-
                                 <div class="mt-4">
                                     <h4><strong>{{ patient.name }} {{ patient.lastName }} </strong></h4>
-                                    <div class="mb-3 mt-2">
-                                        <a href="#">
-                                            <button class="btn btn-sm btn-success">Update</button>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
+                            {{ form_start(patientProfileForm) }}
+                            {{ form_row(patientProfileForm.profileImage) }}
+                            <button class="btn btn-sm btn-success">Update</button>
+                            {{ form_end(patientProfileForm) }}
                         </div>
                     </div>
                 </div>
@@ -49,11 +48,12 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-8">
-                            {% if patient.patientRecordNotes is not null %}
+                            {% if patient.patientRecordNotes is not empty %}
                                 <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i
                                             class="fas fa-exclamation-triangle text-danger"></i></div>
                             {% else %}
-                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes</div>
+                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes
+                                </div>
                             {% endif %}
                             <div class="card-body">
                                 {{ form_start(notesForm) }}
@@ -68,7 +68,6 @@
                             </div>
                         </div>
                         <div class="col-4">
-
                             <div class="card-header border-0 text-white">hidden header</div>
                             <div class="card-body">
                                 <div class="accordion" id="accordion" role="tablist">
@@ -77,19 +76,29 @@
                                             <div class="mb-0 text-center"><a data-toggle="collapse" href="#collapseOne"
                                                                              aria-expanded="false"
                                                                              aria-controls="collapseOne"
-                                                                             class="collapsed text-dark"><i class="fas fa-arrow-alt-circle-down"></i> History</a></div>
+                                                                             class="collapsed text-dark"><i
+                                                            class="fas fa-arrow-alt-circle-down"></i> History</a></div>
                                         </div>
                                         <div class="collapse" id="collapseOne" role="tabpanel"
                                              aria-labelledby="headingOne" data-parent="#accordion" style="">
                                             <div class="card-body">
                                                 {% for notes in allPatientNotes %}
                                                 <ul class="list-group border-0">
-                                                    <li class="list-group-item mb-1 d-flex justify-content-between"><a
-                                                                href="#">{{ notes|join(', ') }}</a> <a href="#"><i
-                                                                    class="fas fa-trash text-danger"></i></a></li>
-                                                    {% endfor %}
-                                                    <li class="list-group-item mb-1"><a href="#">Show all results</a>
+                                                    <li class="list-group-item mb-1 d-flex justify-content-between"><a href="#"
+                                                                data-toggle="modal"
+                                                                data-target="#notesModal">{{ notes|join(', ') }}</a>
+                                                        <a href="#"><i
+                                                                    class="fas fa-trash text-danger"></i></a>
                                                     </li>
+                                                    {% endfor %}
+                                                    {% if allPatientNotes %}
+                                                        <li class="list-group-item mb-1"><a href="{{ path('patient_notes_list',{'patient':patient.id}) }}">Show all
+                                                                results..</a>
+                                                        </li>
+                                                    {% else %}
+                                                        <p>No history for patient
+                                                            <strong>{{ patient.lastName }}</strong></p>
+                                                    {% endif %}
                                                 </ul>
                                             </div>
                                         </div>
@@ -137,7 +146,6 @@
                             </div>
                         </ul>
                     </div>
-
                 </div>
             </div>
             <div class="col-sm-4 col-lg-8">
@@ -227,4 +235,38 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notesModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block customjavascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+        <script>
+            bsCustomFileInput.init()
+            var btn = document.getElementById('btnResetForm')
+            var form = document.querySelector('form')
+            btn.addEventListener('click', function () {
+                form.reset()
+            })
+        </script>
+    {% endblock %}
 {% endblock %}

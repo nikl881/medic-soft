@@ -6,7 +6,10 @@ use App\Entity\Patient;
 use App\Entity\PatientRecordNote;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
+use App\Form\UpdateProfileImagePatientType;
+use App\Form\UpdateProfileImageType;
 use App\Repository\PatientRepository;
+use App\Utils\uploadImagesToS3;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -100,34 +103,62 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager)
+    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3)
     {
         $note = new PatientRecordNote();
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
         $notesForm->handleRequest($request);
 
-        if ($notesForm->isSubmitted() && $notesForm->isValid())
-        {
+        if ($notesForm->isSubmitted() && $notesForm->isValid()) {
             $note = $notesForm->getData();
             $note->setpatient($patient);
 
             $this->addFlash('success', 'Note added!');
             $note->setcreatedAt(new \DateTime());
 
-             $entityManager->persist($note);
-             $entityManager->flush();
+            $entityManager->persist($note);
+            $entityManager->flush();
+        }
+
+        $profileImageForm = $this->createForm(UpdateProfileImagePatientType::class, $patient);
+        $profileImageForm->handleRequest($request);
+
+        if ($profileImageForm->isSubmitted() && $profileImageForm->isValid()) {
+
+            $this->getDoctrine()->getManager();
+            $file = $profileImageForm->get('profileImage')->getData();
+
+            $toS3->uploadProfileImageToS3Bucket($file);
+
+            $image_path = "https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/";
+            $image_name = $file->getClientOriginalName();
+            $combine = $image_path . '' . $image_name;
+            $patient->setProfileImage($combine);
+
+            $this->addFlash('success', 'Patient profile image updated');
+            $this->entityManager->flush();
         }
 
         $getQuery = $this->getDoctrine()
             ->getRepository(PatientRecordNote::class)
             ->testQuery($note, $patient);
 
-
-
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
-            'notesForm' => $notesForm->createView(),
             'allPatientNotes' => $getQuery,
+            'notesForm' => $notesForm->createView(),
+            'patientProfileForm' => $profileImageForm->createView(),
+        ]);
+
+    }
+
+    /**
+     * @Route("/patient/details/notes-list/{patient}", name="patient_notes_list")
+     */
+    public function patientNotesList(Patient $patient)
+    {
+        return $this->render('patient/patient_notes_list.html.twig', [
+            'patient' => $patient,
         ]);
 
     }

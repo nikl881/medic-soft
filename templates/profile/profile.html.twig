@@ -86,10 +86,10 @@
                     <div class="card-body">
                         <div class="mb-2">
                             {% if app.user.profileImage == null %}
-                                <img src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                                <img class="rounded" src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
                                      height="100" alt="avatar placeholder">
                             {% else %}
-                                <img src="{{ app.user.profileImage }}" height="100" alt="profile avatar">
+                                <img class="rounded" src="{{ app.user.profileImage }}" height="100" alt="profile avatar">
                             {% endif %}
                         </div>
                         {{ form_start(userProfileForm) }}
@@ -144,7 +144,6 @@
         </div>
     </div>
     {% block customjavascripts %}
-
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
         <script>
             bsCustomFileInput.init()

@@ -43,7 +43,6 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('profile');
         }
 
-
         $address = $user->getaddress();
         $addressForm = $this->createForm(UpdateProfileAddressType::class, $address);
         $addressForm->handleRequest($request);
