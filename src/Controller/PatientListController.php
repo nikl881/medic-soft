@@ -152,4 +152,15 @@ class PatientListController extends AbstractController
 
     }
 
+    /**
+     * @Route("/patient/details/notes-list/{patient}", name="patient_notes_list")
+     */
+    public function patientNotesList(Patient $patient)
+    {
+        return $this->render('patient/patient_notes_list.html.twig', [
+            'patient' => $patient,
+        ]);
+
+    }
+
 }

@@ -25,20 +25,22 @@
                         <div class="mb-3">
                             <div class="text-center">
                                 {% if patient.profileImage == null %}
-                                    <img class="rounded" src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                                    <img class="rounded"
+                                         src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
                                          height="100" alt="avatar placeholder">
                                 {% else %}
-                                    <img class="rounded" src="{{ patient.profileImage }}" height="100" alt="profile avatar">
+                                    <img class="rounded" src="{{ patient.profileImage }}" height="100"
+                                         alt="profile avatar">
                                 {% endif %}
                                 <div class="mt-4">
                                     <h4><strong>{{ patient.name }} {{ patient.lastName }} </strong></h4>
                                 </div>
                             </div>
-                                {{ form_start(patientProfileForm) }}
-                                {{ form_row(patientProfileForm.profileImage) }}
+                            {{ form_start(patientProfileForm) }}
+                            {{ form_row(patientProfileForm.profileImage) }}
                             <button class="btn btn-sm btn-success">Update</button>
-                                {{ form_end(patientProfileForm) }}
-                            </div>
+                            {{ form_end(patientProfileForm) }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,13 +84,16 @@
                                             <div class="card-body">
                                                 {% for notes in allPatientNotes %}
                                                 <ul class="list-group border-0">
-                                                    <li class="list-group-item mb-1 d-flex justify-content-between"><a
-                                                                href="#">{{ notes|join(', ') }}</a> <a href="#"><i
-                                                                    class="fas fa-trash text-danger"></i></a></li>
+                                                    <li class="list-group-item mb-1 d-flex justify-content-between"><a href="#"
+                                                                data-toggle="modal"
+                                                                data-target="#notesModal">{{ notes|join(', ') }}</a>
+                                                        <a href="#"><i
+                                                                    class="fas fa-trash text-danger"></i></a>
+                                                    </li>
                                                     {% endfor %}
                                                     {% if allPatientNotes %}
                                                         <li class="list-group-item mb-1"><a href="#">Show all
-                                                                results</a>
+                                                                results..</a>
                                                         </li>
                                                     {% else %}
                                                         <p>No history for patient
@@ -230,6 +235,29 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notesModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {% block customjavascripts %}
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
         <script>
