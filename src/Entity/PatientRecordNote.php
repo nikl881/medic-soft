@@ -27,15 +27,16 @@ class PatientRecordNote
      */
     private $created_at;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="patientRecordNotes")
-     */
-    private $patient;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $title;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=patient::class, inversedBy="patientRecordNotes")
+     */
+    private $patient;
 
 
     public function getId(): ?int
@@ -67,17 +68,6 @@ class PatientRecordNote
         return $this;
     }
 
-    public function getPatient(): ?Patient
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(?Patient $patient): self
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
 
     public function getTitle(): ?string
     {
@@ -87,6 +77,18 @@ class PatientRecordNote
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getPatient(): ?patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?patient $patient): self
+    {
+        $this->patient = $patient;
 
         return $this;
     }

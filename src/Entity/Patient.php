@@ -92,10 +92,7 @@ class Patient
      */
     private $patientRecordNotes;
 
-    public function __construct()
-    {
-        $this->patientRecordNotes = new ArrayCollection();
-    }
+
 
 
     public function getId(): ?int
@@ -240,34 +237,21 @@ public function setProfileImage(?string $profileImage): self
     return $this;
 }
 
-/**
- * @return Collection|PatientRecordNote[]
- */
-public function getPatientRecordNotes(): Collection
-{
-    return $this->patientRecordNotes;
-}
-
-public function addPatientRecordNote(?PatientRecordNote $patientRecordNote): self
-{
-    if (!$this->patientRecordNotes->contains($patientRecordNote)) {
-        $this->patientRecordNotes[] = $patientRecordNote;
-        $patientRecordNote->setPatient($this);
+    /**
+     * @return mixed
+     */
+    public function getPatientRecordNotes()
+    {
+        return $this->patientRecordNotes;
     }
 
-    return $this;
-}
-
-public function removePatientRecordNote(?PatientRecordNote $patientRecordNote): self
-{
-    if ($this->patientRecordNotes->removeElement($patientRecordNote)) {
-        // set the owning side to null (unless already changed)
-        if ($patientRecordNote->getPatient() === $this) {
-            $patientRecordNote->setPatient(null);
-        }
+    /**
+     * @param mixed $patientRecordNotes
+     */
+    public function setPatientRecordNotes($patientRecordNotes): void
+    {
+        $this->patientRecordNotes = $patientRecordNotes;
     }
 
-    return $this;
-}
 
 }
