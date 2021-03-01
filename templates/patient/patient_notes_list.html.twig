@@ -26,12 +26,12 @@
         </tr>
         </thead>
         <tbody>
-        {% for notes in allPatientNotes %}
+        {% for note in patient.patientRecordNotes %}
             <tr>
-                <td>{{ notes.id }}</td>
-                <td>{{ notes.title }}</td>
-                <td>{{ notes.date|date("d-m-Y") }}</td>
-                <td>{{ notes.content }}</td>
+                <td>{{ note.id }}</td>
+                <td>{{ note.title }}</td>
+                <td>{{ note.createdAt|date("d-m-Y") }}</td>
+                <td>{{ note.content }}</td>
             </tr>
         {% endfor %}
         </tbody>
