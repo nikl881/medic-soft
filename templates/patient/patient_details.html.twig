@@ -48,13 +48,13 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-8">
-                            {# {% if patient.patientRecordNotes is not empty %} #}
-                            {# <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i #}
-                            {# class="fas fa-exclamation-triangle text-danger"></i></div> #}
-                            {# {% else %} #}
-                            {# <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes #}
-                            {# </div> #}
-                            {# {% endif %} #}
+                             {% if patient.patientRecordNotes is not empty %}
+                             <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i
+                             class="fas fa-exclamation-triangle text-danger"></i></div>
+                             {% else %}
+                             <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes
+                             </div>
+                             {% endif %}
                             <div class="card-body">
                                 {{ form_start(notesForm) }}
                                 <div class="mb-2">
@@ -256,7 +256,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="d-flex">
-                            <div class="fixed-width-120">Note ID:</div>
+                            <div class="fixed-width-120">Note Id:</div>
                             <div>{{ notes.id }}</div>
                         </div>
                         <div class="d-flex">
@@ -279,7 +279,6 @@
             </div>
         </div>
     {% endfor %}
-
 
     {% block customjavascripts %}
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
