@@ -53,5 +53,4 @@ class DoctorListController extends AbstractController
     }
 
 
-
 }

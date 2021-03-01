@@ -103,7 +103,7 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3)
+    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3, PatientRecordNote $patientRecordNote)
     {
         $note = new PatientRecordNote();
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
@@ -139,13 +139,15 @@ class PatientListController extends AbstractController
             $this->entityManager->flush();
         }
 
-        $getQuery = $this->getDoctrine()
+        $getTitleQuery = $this->getDoctrine()
             ->getRepository(PatientRecordNote::class)
-            ->testQuery($note, $patient);
+            ->getPatientNotesQuery($note, $patient);
+
 
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
-            'allPatientNotes' => $getQuery,
+            'patientRecordNote' => $patientRecordNote,
+            'allPatientNotes' => $getTitleQuery,
             'notesForm' => $notesForm->createView(),
             'patientProfileForm' => $profileImageForm->createView(),
         ]);
@@ -160,6 +162,15 @@ class PatientListController extends AbstractController
         return $this->render('patient/patient_notes_list.html.twig', [
             'patient' => $patient,
         ]);
+
+    }
+
+
+    /**
+     * @Route("/patient/details/notes-modal/{note_id}", name="patient_notes_modal")
+     */
+    public function patientNotesModal()
+    {
 
     }
 

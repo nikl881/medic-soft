@@ -28,9 +28,11 @@
             <tr>
                 <td>{{ user.lastName }}, {{ user.name|first }}</td>
                 {% if user.profileImage == null %}
-                <td><img class="c-avatar-img table-avatar-img" src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg" alt="avatar placeholder"></td>
+                    <td><img class="c-avatar-img table-avatar-img"
+                             src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
+                             alt="avatar placeholder"></td>
                 {% else %}
-                <td><img class="c-avatar-img table-avatar-img" src="{{ user.profileImage }}" alt="avatar"></td>
+                    <td><img class="c-avatar-img table-avatar-img" src="{{ user.profileImage }}" alt="avatar"></td>
                 {% endif %}
                 <td>{{ user.medicalSpecialty }}</td>
                 <td>{{ user.email }}</td>
