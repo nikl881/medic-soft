@@ -159,8 +159,11 @@ class PatientListController extends AbstractController
      */
     public function patientNotesList(Patient $patient)
     {
+        $patientRecordNote = $this->getDoctrine()->getRepository(PatientRecordNote::class);
+
         return $this->render('patient/patient_notes_list.html.twig', [
             'patient' => $patient,
+            'allPatientNotes' => $patientRecordNote,
         ]);
 
     }
