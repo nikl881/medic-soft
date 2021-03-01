@@ -1,0 +1,38 @@
+<!-- Modal for notes -->
+{% for notes in allPatientNotes %}
+    <div class="modal fade" id="notesModal{{ notes.id }}" tabindex="-1" role="dialog"
+         aria-labelledby="notesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notesModalLabel">Notes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex">
+                        <div class="fixed-width-120">Note Id:</div>
+                        <div>{{ notes.id }}</div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="fixed-width-120">Title:</div>
+                        <div>{{ notes.title }}</div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="fixed-width-120">Content:</div>
+                        <div>{{ notes.content }}</div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="fixed-width-120">Date created:</div>
+                        <div>{{ notes.created_at|date("d-m-Y") }}</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -44,7 +44,7 @@
                         <i class="fas fa-circle text-danger fa-sm"></i>
                     {% endif %}
                 <td>{{ user.location }}</td>
-                <td><i class="fas fa-eye" data-toggle="modal" data-target="#exampleModal{{ user.name }}"></i>
+                <td><i class="fas fa-eye" data-toggle="modal" data-target="#userModal{{ user.name }}"></i>
                 </td>
             </tr>
         {% endfor %}
@@ -52,13 +52,13 @@
     </table>
 
     {% for user in users %}
-        <div class="modal fade" id="exampleModal{{ user.name }}" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="userModal{{ user.name }}" tabindex="-1" role="dialog"
+             aria-labelledby="userModalLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user"></i> Employee information
+                        <h5 class="modal-title" id="userModalLabel"><i class="fas fa-user"></i> Employee information
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
