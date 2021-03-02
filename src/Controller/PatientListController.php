@@ -172,12 +172,13 @@ class PatientListController extends AbstractController
      */
     public function deleteNote(PatientRecordNote $note)
     {
+        $getPatient = $note->getPatient();
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($note);
         $em->flush();
 
-        return $this->redirectToRoute('patient_list_total');
+        return $this->redirectToRoute('patient_details', ['patient' => $getPatient->getId()]);
     }
 
 }
