@@ -84,6 +84,7 @@ class Patient
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Valid image file required")
      */
     private $profileImage;
 
@@ -91,9 +92,6 @@ class Patient
      * @ORM\OneToMany(targetEntity=PatientRecordNote::class, mappedBy="patient")
      */
     private $patientRecordNotes;
-
-
-
 
     public function getId(): ?int
     {
