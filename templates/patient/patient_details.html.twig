@@ -106,7 +106,6 @@
                                                     {% endif %}
                                                 </ul>
                                             </div>
-                                            {{ include('patient/includes/_patient_notes_modal.html.twig') }}
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +157,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -212,6 +210,9 @@
             </div>
         </div>
     </div>
+
+    {{ include('patient/includes/_patient_notes_modal.html.twig') }}
+
     {% block customjavascripts %}
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
         <script>

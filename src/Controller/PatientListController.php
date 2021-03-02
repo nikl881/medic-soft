@@ -7,6 +7,7 @@ use App\Entity\PatientRecordNote;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Form\UpdateProfileImagePatientType;
+use App\Form\UpdateProfileImageType;
 use App\Repository\PatientRepository;
 use App\Utils\uploadImagesToS3;
 use Doctrine\ORM\EntityManagerInterface;
@@ -98,6 +99,7 @@ class PatientListController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
@@ -139,7 +141,7 @@ class PatientListController extends AbstractController
             $this->entityManager->flush();
         }
 
-        $getNotesQuery = $this->getDoctrine()
+        $getNoteQuery = $this->getDoctrine()
             ->getRepository(PatientRecordNote::class)
             ->getPatientNotesQuery($note, $patient);
 
@@ -147,7 +149,7 @@ class PatientListController extends AbstractController
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
             'patientRecordNote' => $patientRecordNote,
-            'allPatientNotes' => $getNotesQuery,
+            'allPatientNotes' => $getNoteQuery,
             'notesForm' => $notesForm->createView(),
             'patientProfileForm' => $profileImageForm->createView(),
         ]);
@@ -164,4 +166,5 @@ class PatientListController extends AbstractController
         ]);
 
     }
+
 }
