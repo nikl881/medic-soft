@@ -7,6 +7,7 @@ use App\Entity\PatientRecordNote;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Form\UpdateProfileImagePatientType;
+use App\Form\UpdateProfileImageType;
 use App\Repository\PatientRepository;
 use App\Utils\uploadImagesToS3;
 use Doctrine\ORM\EntityManagerInterface;
@@ -98,13 +99,12 @@ class PatientListController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3)
+    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3, PatientRecordNote $patientRecordNote)
     {
-        $patientRecordNote = $this->getDoctrine()->getRepository(PatientRecordNote::class);
-
         $note = new PatientRecordNote();
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
         $notesForm->handleRequest($request);
@@ -139,7 +139,7 @@ class PatientListController extends AbstractController
             $this->entityManager->flush();
         }
 
-        $getNotesQuery = $this->getDoctrine()
+        $getTitleQuery = $this->getDoctrine()
             ->getRepository(PatientRecordNote::class)
             ->getPatientNotesQuery($note, $patient);
 
@@ -147,7 +147,7 @@ class PatientListController extends AbstractController
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
             'patientRecordNote' => $patientRecordNote,
-            'allPatientNotes' => $getNotesQuery,
+            'allPatientNotes' => $getTitleQuery,
             'notesForm' => $notesForm->createView(),
             'patientProfileForm' => $profileImageForm->createView(),
         ]);
@@ -157,13 +157,12 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/notes-list/{patient}", name="patient_notes_list")
      */
-    public function patientNotesList(Patient $patient, PatientRecordNote $patientRecordNote)
+    public function patientNotesList(Patient $patient)
     {
-
         return $this->render('patient/patient_notes_list.html.twig', [
             'patient' => $patient,
-            'notes' => $patientRecordNote,
         ]);
 
     }
+
 }
