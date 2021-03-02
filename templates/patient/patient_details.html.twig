@@ -90,7 +90,7 @@
                                                                 data-target="#notesModal{{ notes.id }}">
                                                             {{ notes.title }}
                                                         </div>
-                                                        <a href="#"><i
+                                                        <a href="{{ path('delete_patient_note', {'note': notes.id }) }}"><i
                                                                     class="fas fa-trash text-danger"></i></a>
                                                     </li>
                                                     {% endfor %}

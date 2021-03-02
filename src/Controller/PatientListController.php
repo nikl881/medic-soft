@@ -7,10 +7,10 @@ use App\Entity\PatientRecordNote;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Form\UpdateProfileImagePatientType;
-use App\Form\UpdateProfileImageType;
 use App\Repository\PatientRepository;
 use App\Utils\uploadImagesToS3;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -165,6 +165,19 @@ class PatientListController extends AbstractController
             'patient' => $patient,
         ]);
 
+    }
+
+    /**
+     * @Route ("delete-patient-note/{note}", name="delete_patient_note")
+     */
+    public function deleteNote(PatientRecordNote $note)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($note);
+        $em->flush();
+
+        return $this->redirectToRoute('patient_list_total');
     }
 
 }
