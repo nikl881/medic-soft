@@ -1,5 +1,5 @@
-<!-- Modal for notes -->
-{% for note in notes %}
+{% for notes in allPatientNotes %}
+    <!-- Modal for notes -->
     <div class="modal fade" id="notesModal{{ notes.id }}" tabindex="-1" role="dialog"
          aria-labelledby="notesModalLabel"
          aria-hidden="true">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="d-flex">
-                        <div class="fixed-width-120">Note Id:</div>
+                        <div class="fixed-width-120">Note ID:</div>
                         <div>{{ notes.id }}</div>
                     </div>
                     <div class="d-flex">

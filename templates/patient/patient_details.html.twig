@@ -48,13 +48,13 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-8">
-                            {# {% if patient.patientRecordNotes is not empty %} #}
-                            {# <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i #}
-                            {# class="fas fa-exclamation-triangle text-danger"></i></div> #}
-                            {# {% else %} #}
-                            {# <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes #}
-                            {# </div> #}
-                            {# {% endif %} #}
+                             {% if patient.patientRecordNotes is not empty %}
+                             <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i
+                             class="fas fa-exclamation-triangle text-danger"></i></div>
+                             {% else %}
+                             <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes
+                             </div>
+                             {% endif %}
                             <div class="card-body">
                                 {{ form_start(notesForm) }}
                                 <div class="mb-2">
@@ -120,36 +120,7 @@
                 <div class="card">
                     <div class="card-header border-0"><i class="fas fa-info-circle"></i> Information</div>
                     <div class="card-body">
-                        <ul class="list-unstyled">
-                            <div class="d-flex">
-                                <div class="fixed-width-120">Name:</div>
-                                <div>{{ patient.name }}</div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="fixed-width-120">Last name:</div>
-                                <div>{{ patient.lastName }}</div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="fixed-width-120">Email:</div>
-                                <div>{{ patient.email }}</div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="fixed-width-120">Birthdate:</div>
-                                <div>{{ patient.birthdate|date("d-m-Y") }}</div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="fixed-width-120">Phonenumber:</div>
-                                <div>{{ patient.phoneNumber }}</div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="fixed-width-120">Insurance No:</div>
-                                <div>{{ patient.insuranceNumber }}</div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="fixed-width-120">Insurance Co:</div>
-                                <div>{{ patient.insuranceCompany }}</div>
-                            </div>
-                        </ul>
+                        {{ include('patient/includes/_patient_general_information.html.twig') }}
                     </div>
                 </div>
             </div>
@@ -186,7 +157,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -241,45 +211,7 @@
         </div>
     </div>
 
-    {% for notes in allPatientNotes %}
-        <!-- Modal for notes -->
-        <div class="modal fade" id="notesModal{{ notes.id }}" tabindex="-1" role="dialog"
-             aria-labelledby="notesModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="notesModalLabel">Notes</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex">
-                            <div class="fixed-width-120">Note ID:</div>
-                            <div>{{ notes.id }}</div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="fixed-width-120">Title:</div>
-                            <div>{{ notes.title }}</div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="fixed-width-120">Content:</div>
-                            <div>{{ notes.content }}</div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="fixed-width-120">Date created:</div>
-                            <div>{{ notes.created_at|date("d-m-Y") }}</div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-
+    {{ include('patient/includes/_patient_notes_modal.html.twig') }}
 
     {% block customjavascripts %}
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
