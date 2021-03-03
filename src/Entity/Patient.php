@@ -84,7 +84,6 @@ class Patient
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Valid image file required")
      */
     private $profileImage;
 

@@ -50,3 +50,7 @@ body {
 .custom-bar-color{
     background-color: #cacaca;
 }
+
+.custom-range-score-width{
+    width: 400px;
+}

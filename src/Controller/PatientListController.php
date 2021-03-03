@@ -115,7 +115,7 @@ class PatientListController extends AbstractController
             $note = $notesForm->getData();
             $note->setpatient($patient);
 
-            $this->addFlash('success', 'Note added!');
+            $this->addFlash('success', 'Note added');
             $note->setcreatedAt(new \DateTime());
 
             $entityManager->persist($note);

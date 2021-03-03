@@ -27,12 +27,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>2</strong> Pain indication on a scale of 1
+                                <label class="col-md-3"><strong>2</strong> Pain indication on scale from 1
                                     to 10?</label>
                                 <div class="col-md-9">
                                     <div class="d-flex justify-content-between">
                                         <p>1</p>
-                                        <div class="form-group" style="width: 400px"> {{ form_row(form.painIndication, {'label':false}) }}</div>
+                                        <div class="form-group custom-range-score-width"> {{ form_row(form.painIndication, {'label':false}) }}</div>
                                         <p>10</p>
                                     </div>
 
