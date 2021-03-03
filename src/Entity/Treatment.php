@@ -18,12 +18,12 @@ class Treatment
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $stage;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $startDate;
 
@@ -46,6 +46,16 @@ class Treatment
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $refferal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=patient::class, inversedBy="treatments")
+     */
+    private $patient;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $urgencyComment;
 
     public function getId(): ?int
     {
@@ -120,6 +130,30 @@ class Treatment
     public function setRefferal(string $refferal): self
     {
         $this->refferal = $refferal;
+
+        return $this;
+    }
+
+    public function getPatient(): ?patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?patient $patient): self
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getUrgencyComment(): ?string
+    {
+        return $this->urgencyComment;
+    }
+
+    public function setUrgencyComment(?string $urgencyComment): self
+    {
+        $this->urgencyComment = $urgencyComment;
 
         return $this;
     }
