@@ -21,7 +21,9 @@ class IntakeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            dd("valid");
+           $form->getData();
+
+           dd($form);
         }
 
         return $this->render('patient/intake/patient_intake.html.twig', [
