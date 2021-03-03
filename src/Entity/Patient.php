@@ -92,6 +92,16 @@ class Patient
      */
     private $patientRecordNotes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Treatment::class, mappedBy="patient")
+     */
+    private $treatments;
+
+    public function __construct()
+    {
+        $this->treatments = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -248,6 +258,36 @@ public function setProfileImage(?string $profileImage): self
     public function setPatientRecordNotes($patientRecordNotes): void
     {
         $this->patientRecordNotes = $patientRecordNotes;
+    }
+
+    /**
+     * @return Collection|Treatment[]
+     */
+    public function getTreatments(): Collection
+    {
+        return $this->treatments;
+    }
+
+    public function addTreatment(Treatment $treatment): self
+    {
+        if (!$this->treatments->contains($treatment)) {
+            $this->treatments[] = $treatment;
+            $treatment->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTreatment(Treatment $treatment): self
+    {
+        if ($this->treatments->removeElement($treatment)) {
+            // set the owning side to null (unless already changed)
+            if ($treatment->getPatient() === $this) {
+                $treatment->setPatient(null);
+            }
+        }
+
+        return $this;
     }
 
 
