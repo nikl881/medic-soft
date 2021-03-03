@@ -5,11 +5,13 @@
 {% block main %}
     <div class="container">
         {{ include('patient/includes/_proces_treatment_status.html.twig') }}
-        <hr class="border-warning">
+        <div class='outer'>
+            <div class='inner2'></div>
+        </div>
         <div class="col-12">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-3">
                 <h1 class="text-center">Intake </h1>
-                <h3 class="text-right">Completion 2/3</h3>
+                <h3 class="text-right">Part 2/3</h3>
             </div>
         </div>
         <div class="row">
@@ -20,7 +22,7 @@
                          {{ form_start(form) }}
                         <div class="form-horizontal">
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>1</strong> What urgency do you estimate as the primary doctor? </label>
+                                <label class="col-md-3"><strong>1</strong> What urgency do you estimate? </label>
                                 <div class="col-md-9">
                                      {{ form_row(form.urgency, {'label':false}) }}
                                 </div>
@@ -47,14 +49,16 @@
                             <a href="{{ path('patient_intake_part_one',{'patient':patient.id}) }}">
                                 <button type="button" class="btn btn-sm btn-dark">Back</button>
                             </a>
+                            <a href="{{ path('patient_intake_part_three',{'patient':patient.id}) }}">
                             <button type="button" class="btn btn-sm btn-dark border-left">Next</button>
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
                         <ul class="list-group bg-white">
                             <li class="list-group-item"><a href="{{ path('patient_intake_part_one',{'patient':patient.id}) }}"> <strong>Form 1</strong> Reason for intake</a></li>
                             <li class="list-group-item active"><strong>Form 2</strong> Additional information</li>
-                            <li class="list-group-item"><strong>Form 3</strong> Determination follow-up</li>
+                            <li class="list-group-item"><a href="{{ path('patient_intake_part_three',{'patient':patient.id}) }}"><strong>Form 3</strong> Determination follow-up</a></li>
                         </ul>
                     </div>
                 </div>

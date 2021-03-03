@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Form\IntakeDeterminationType;
 use App\Form\IntakeReasonType;
 use App\Form\IntakeUrgencyType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,6 +59,20 @@ class IntakeController extends AbstractController
         }
 
         return $this->render('patient/intake/patient_intake_part_2.html.twig', [
+            'form' => $form->createView(),
+            'patient' => $patient,
+        ]);
+    }
+
+    /**
+     * @Route("/patient/intake-part-three/{patient}", name="patient_intake_part_three")
+     */
+    public function intakePartThree(Request $request, Patient $patient)
+    {
+        $form = $this->createForm(IntakeDeterminationType::class);
+        $form->handleRequest($request);
+
+        return $this->render('patient/intake/patient_intake_part_3.html.twig', [
             'form' => $form->createView(),
             'patient' => $patient,
         ]);
