@@ -57,6 +57,36 @@ class Treatment
      */
     private $urgencyComment;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $existingComplaints;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $weightLoss;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $geneticDisorders;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $formerOperations;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $chronicDisorders;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $intoxication;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +184,78 @@ class Treatment
     public function setUrgencyComment(?string $urgencyComment): self
     {
         $this->urgencyComment = $urgencyComment;
+
+        return $this;
+    }
+
+    public function getExistingComplaints(): ?string
+    {
+        return $this->existingComplaints;
+    }
+
+    public function setExistingComplaints(?string $existingComplaints): self
+    {
+        $this->existingComplaints = $existingComplaints;
+
+        return $this;
+    }
+
+    public function getWeightLoss(): ?string
+    {
+        return $this->weightLoss;
+    }
+
+    public function setWeightLoss(?string $weightLoss): self
+    {
+        $this->weightLoss = $weightLoss;
+
+        return $this;
+    }
+
+    public function getGeneticDisorders(): ?string
+    {
+        return $this->geneticDisorders;
+    }
+
+    public function setGeneticDisorders(?string $geneticDisorders): self
+    {
+        $this->geneticDisorders = $geneticDisorders;
+
+        return $this;
+    }
+
+    public function getFormerOperations(): ?string
+    {
+        return $this->formerOperations;
+    }
+
+    public function setFormerOperations(?string $formerOperations): self
+    {
+        $this->formerOperations = $formerOperations;
+
+        return $this;
+    }
+
+    public function getChronicDisorders(): ?string
+    {
+        return $this->chronicDisorders;
+    }
+
+    public function setChronicDisorders(?string $chronicDisorders): self
+    {
+        $this->chronicDisorders = $chronicDisorders;
+
+        return $this;
+    }
+
+    public function getIntoxication(): ?string
+    {
+        return $this->intoxication;
+    }
+
+    public function setIntoxication(?string $intoxication): self
+    {
+        $this->intoxication = $intoxication;
 
         return $this;
     }
