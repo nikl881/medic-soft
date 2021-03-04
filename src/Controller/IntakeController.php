@@ -72,6 +72,19 @@ class IntakeController extends AbstractController
         $form = $this->createForm(IntakeDeterminationType::class);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $treatment = $form->getData();
+            $treatment->setpatient($patient);
+            $em->persist($treatment);
+            $em->flush();
+
+            return $this->redirectToRoute('patient_intake_part_three', ['patient' => $patient->getId()]);
+
+//            return $this->redirectToRoute('diagnosis', ['patient' => $patient->getId()]);
+        }
+
         return $this->render('patient/intake/patient_intake_part_3.html.twig', [
             'form' => $form->createView(),
             'patient' => $patient,

@@ -26,9 +26,9 @@ class IntakeDeterminationType extends AbstractType
                 'placeholder' => 'Show all',
                 'label' => 'Intoxications / abuses',
                 'choices' => [
-                    'Alcohol' => 0,
-                    'Smoking' => 1,
-                    'Other..' => 3,
+                    'Alcohol' => 'Alcohol',
+                    'Smoking' => 'Smoking',
+                    'Other..' => 'Other',
                 ],
                 'attr' => [
                     'class' => 'select2',
