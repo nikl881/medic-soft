@@ -22,43 +22,42 @@
                         {{ form_start(form) }}
                         <div class="form-horizontal">
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>1</strong> Direct medical reason for
-                                    intake?</label>
+                                <label class="col-md-3"><strong>1</strong> Does the patient have existing
+                                    complaints?</label>
                                 <div class="col-md-9">
                                     {{ form_row(form.existingComplaints, {'label':false}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>2</strong> Referral to another healthcare
-                                    provider or patients own initiative?</label>
+                                <label class="col-md-3"><strong>2</strong> Does the patient suffer from weight
+                                    loss?</label>
                                 <div class="col-md-9">
                                     {{ form_row(form.weightLoss, {'label':false}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>3</strong> Referral to another healthcare
-                                    provider or patients own initiative?</label>
+                                <label class="col-md-3"><strong>3</strong> Are there any genetic abnormalities in the
+                                    family?</label>
                                 <div class="col-md-9">
                                     {{ form_row(form.geneticDisorders, {'label':false}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>4</strong> Referral to another healthcare
-                                    provider or patients own initiative?</label>
+                                <label class="col-md-3"><strong>4</strong> Has the patient undergone previous
+                                    operations?</label>
                                 <div class="col-md-9">
                                     {{ form_row(form.formerOperations, {'label':false}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>5</strong> Referral to another healthcare
-                                    provider or patients own initiative?</label>
+                                <label class="col-md-3"><strong>5</strong> Does the patient have chronic
+                                    illnesses?</label>
                                 <div class="col-md-9">
                                     {{ form_row(form.chronicDisorders, {'label':false}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3"><strong>6</strong> Referral to another healthcare
-                                    provider or patients own initiative?</label>
+                                <label class="col-md-3"><strong>6</strong> Are there intoxications or abuses?</label>
                                 <div class="col-md-9">
                                     {{ form_row(form.intoxication, {'label':false}) }}
                                 </div>
@@ -79,7 +78,7 @@
                             <a href="{{ path('patient_intake_part_two',{'patient':patient.id}) }}">
                                 <button type="button" class="btn btn-sm btn-dark">Back</button>
                             </a>
-                                <button type="button" class="btn btn-sm btn-dark border-left disabled">Next</button>
+                            <button type="button" class="btn btn-sm btn-dark border-left disabled">Next</button>
                         </div>
                     </div>
                     <div class="card-body">
