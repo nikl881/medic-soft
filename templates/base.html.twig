@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>{% block title %}MedicSoft | main {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     {% block stylesheets %}
@@ -94,9 +93,7 @@
                 </li>
             </ul>
         </div>
-
         <div class="navbar-right">
-
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".dual-collapse2">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -134,10 +131,8 @@
             </ul>
         </div>
     </nav>
-    <div class="c-subheader px-3 d-flex align-items-center custom-bar-color"><i
-                class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
-        <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>
-    </div>
+    {% block breadcrumb %}
+    {% endblock breadcrumb %}
     <div class="c-body">
         <main class="c-main">
             {% block main %}
