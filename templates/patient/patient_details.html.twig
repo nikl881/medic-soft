@@ -4,8 +4,8 @@
 
 {% block main %}
     <div class="container">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
-            <h1><i class="fas fa-user"></i> Patient details</h1>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3 bg-secondary rounded">
+            <h1 class="px-3 header-custom-color">Medical record</h1>
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                     <button type="button" class="btn btn-dark">Start treatment</button>
@@ -18,28 +18,31 @@
                 </div>
             </div>
         </div>
+        <hr class="border-card-custom">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="card d-flex">
                     <div class="card-body">
+                        {{ form_start(patientProfileForm) }}
                         <div class="mb-3">
                             <div class="text-center">
                                 {% if patient.profileImage == null %}
-                                    <img class="rounded"
+                                    <img class=" table-avatar-img-patient-card c-avatar-img-patient-card"
                                          src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
-                                         height="100" alt="avatar placeholder">
+                                          alt="avatar placeholder">
                                 {% else %}
-                                    <img class="rounded" src="{{ patient.profileImage }}" height="100"
+                                    <img class="table-avatar-img-patient-card c-avatar-img-patient-card" src="{{ patient.profileImage }}"
                                          alt="profile avatar">
                                 {% endif %}
                                 <div class="mt-4">
                                     <h4><strong>{{ patient.name }} {{ patient.lastName }} </strong></h4>
                                 </div>
-                            </div>
-                            {{ form_start(patientProfileForm) }}
-                            {{ form_row(patientProfileForm.profileImage) }}
+
+                                {{ form_row(patientProfileForm.profileImage) }}
+
                             <button class="btn btn-sm btn-success">Update</button>
                             {{ form_end(patientProfileForm) }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -122,7 +125,7 @@
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="card">
-                    <div class="card-header border-0"><i class="fas fa-info-circle"></i> Information</div>
+                    <div class="card-header border-0"><i class="fas fa-info-circle"></i>Patient information</div>
                     <div class="card-body">
                         {{ include('patient/includes/_patient_general_information.html.twig') }}
                     </div>
@@ -166,6 +169,56 @@
                 <div class="card">
                     <div class="card-header border-0">
                         <i class="fas fa-clock"></i> Treatment history
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped border-secondary">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Inducement
+                                </th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Diagnosis</th>
+                                <th scope="col">Treatment</th>
+                                <th scope="col">Status</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Persistent headache</td>
+                                <td>12-04-2019</td>
+                                <td>33</td>
+                                <td>Plan 2</td>
+                                <td>Active</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Car accident</td>
+                                <td>12-04-2019</td>
+                                <td>12</td>
+                                <td>Plan 4</td>
+                                <td>Closed</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Cold complains</td>
+                                <td>12-04-2019</td>
+                                <td>77</td>
+                                <td>Plan 5</td>
+                                <td>Closed</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-sm btn-dark float-right">Show all</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <i class="far fa-chart-bar"></i> Lab results
                     </div>
                     <div class="card-body">
                         <table class="table table-striped border-secondary">

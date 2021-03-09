@@ -42,6 +42,17 @@ body {
     max-height: 30px;
 }
 
+.table-avatar-img-patient-card{
+    max-width: 125px;
+    max-height: 125px;
+}
+
+.c-avatar-img-patient-card{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
 .deco-none {
     color: inherit;
     text-decoration:none;
@@ -49,4 +60,13 @@ body {
 
 .custom-bar-color{
     background-color: #cacaca;
+}
+
+.border-card-custom{
+    color: #ac8199;
+    border: 1px solid;
+}
+
+.header-custom-color{
+    color: #7d526a;
 }
