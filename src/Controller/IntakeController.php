@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\Treatment;
 use App\Form\IntakeDeterminationType;
 use App\Form\IntakeReasonType;
 use App\Form\IntakeUrgencyType;
@@ -17,7 +18,7 @@ class IntakeController extends AbstractController
     /**
      * @Route("/patient/intake-part-one/{patient}", name="patient_intake_part_one")
      */
-    public function intakePartOne(Request $request, Patient $patient): Response
+    public function intakePartOne(Request $request, Patient $patient, Treatment $treatment): Response
     {
         $form = $this->createForm(IntakeReasonType::class);
         $form->handleRequest($request);
@@ -30,12 +31,14 @@ class IntakeController extends AbstractController
            $em->persist($treatment);
            $em->flush();
 
-            return $this->redirectToRoute('patient_intake_part_two', ['patient' => $patient->getId()]);
+            return $this->redirectToRoute('patient_intake_part_one', ['patient' => $patient->getId()]);
         }
+
 
         return $this->render('patient/intake/patient_intake_part_1.html.twig', [
             'form' => $form->createView(),
             'patient' => $patient,
+            'treatment' => $treatment,
         ]);
     }
 

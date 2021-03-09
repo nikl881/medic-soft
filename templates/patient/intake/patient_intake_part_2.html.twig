@@ -2,6 +2,23 @@
 
 {% block title %}MedicSoft | Patient intake {% endblock %}
 
+ {% block breadcrumb %}
+     <nav aria-label="breadcrumb ">
+         <ol class="breadcrumb custom-bar-color">
+             <li class="breadcrumb-item active">Intake</li>
+             <li class="breadcrumb-item"><a href="#">Diagnosis</a></li>
+             <li class="breadcrumb-item"><a href="#">Treatment</a></li>
+             <li class="breadcrumb-item"><a href="#">Aftercare</a></li>
+             <li class="ml-auto" aria-current="page">
+                 <div class=" px-3 d-flex align-items-center custom-bar-color "><i
+                             class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
+                     <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>
+                 </div>
+             </li>
+         </ol>
+     </nav>
+ {% endblock breadcrumb %}
+
 {% block main %}
     <div class="container">
         {{ include('patient/includes/_proces_treatment_status.html.twig') }}
