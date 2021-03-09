@@ -54,14 +54,13 @@
     <div class="row">
         <div class="col-2">
             <div class="navigation">
-{#                {{ knp_pagination_render(patients) }}#}
+                {{ knp_pagination_render(notes) }}
             </div>
         </div>
         <div class="col-9">
         </div>
         <div class="col-1">
-{#            <strong>Total:</strong> <i>{{ patients.getTotalItemCount }}</i>#}
+            <strong>Total:</strong> <i>{{ notes.getTotalItemCount }}</i>
         </div>
     </div>
-
 {% endblock %}

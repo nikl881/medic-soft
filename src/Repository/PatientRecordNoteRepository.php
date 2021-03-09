@@ -6,6 +6,7 @@ use App\Entity\Patient;
 use App\Entity\PatientRecordNote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method PatientRecordNote|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,9 +16,20 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PatientRecordNoteRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var ManagerRegistry
+     */
+    private ManagerRegistry $registry;
+    /**
+     * @var PaginatorInterface
+     */
+    private PaginatorInterface $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, PatientRecordNote::class);
+        $this->registry = $registry;
+        $this->paginator = $paginator;
     }
 
     public function getPatientNotesQuery(PatientRecordNote $note, Patient $patient)
@@ -43,6 +55,19 @@ class PatientRecordNoteRepository extends ServiceEntityRepository
             ->setParameter('patientId', $patient->getId());
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findAllPaginatedPatientNotes(Patient $patient, $page)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        $qb->select('v')
+            ->where('v.patient = :patientId')
+            ->setParameter('patientId',  $patient->getId());
+
+        $pagination = $this->paginator->paginate($qb, $page, 10);
+
+        return $pagination;
     }
 
 }

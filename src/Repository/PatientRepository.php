@@ -35,7 +35,7 @@ class PatientRepository extends ServiceEntityRepository
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();
 
-        $pagination = $this->paginator->paginate($dbquery, $page, 10);
+        $pagination = $this->paginator->paginate($dbquery, $page, 5);
 
         return $pagination;
     }
@@ -45,7 +45,7 @@ class PatientRepository extends ServiceEntityRepository
         $dbquery = $this->createQueryBuilder('v')
             ->getQuery();
 
-        $pagination = $this->paginator->paginate($dbquery, $page, 10);
+        $pagination = $this->paginator->paginate($dbquery, $page, 5);
 
         return $pagination;
     }
@@ -67,7 +67,7 @@ class PatientRepository extends ServiceEntityRepository
             ->where('v.user = :userId')
             ->setParameter('userId',  $user->getId());
 
-        $pagination = $this->paginator->paginate($qb, $page, 10);
+        $pagination = $this->paginator->paginate($qb, $page, 5);
 
         return $pagination;
     }
@@ -83,5 +83,6 @@ class PatientRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
 
 }
