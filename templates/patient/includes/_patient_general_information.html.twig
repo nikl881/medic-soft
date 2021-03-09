@@ -27,4 +27,8 @@
         <div class="fixed-width-120">Insurance Co:</div>
         <div>{{ patient.insuranceCompany }}</div>
     </div>
+    <div class="d-flex">
+        <div class="fixed-width-120">Register date:</div>
+        <div>{{ patient.dateCreated|date('d-m-Y') }}</div>
+    </div>
 </ul>
