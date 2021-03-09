@@ -74,25 +74,3 @@ body {
 .custom-range-score-width{
     width: 400px;
 }
-
-.outer{
-    margin-top: 5px;
-    width: auto;
-}
-.inner{
-    background-color: #cfa956;
-    width: 5.5%;
-    height: 5px;
-}
-
-.inner2{
-    background-color: #cfa956;
-    width: 11%;
-    height: 5px;
-}
-
-.inner3{
-    background-color: #cfa956;
-    width: 16.5%;
-    height: 5px;
-
