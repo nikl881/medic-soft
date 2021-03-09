@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MedicSoft | Patient intake {% endblock %}
+
+ {% block breadcrumb %}
+     <nav aria-label="breadcrumb ">
+         <ol class="breadcrumb custom-bar-color">
+             <li class="breadcrumb-item active">Intake</li>
+             <li class="breadcrumb-item"><a href="#">Diagnosis</a></li>
+             <li class="breadcrumb-item"><a href="#">Treatment</a></li>
+             <li class="breadcrumb-item"><a href="#">Aftercare</a></li>
+             <li class="ml-auto" aria-current="page">
+                 <div class=" px-3 d-flex align-items-center custom-bar-color "><i
+                             class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
+                     <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>
+                 </div>
+             </li>
+         </ol>
+     </nav>
+ {% endblock breadcrumb %}
+
+{% block main %}
+    <div class="container">
+        {{ include('patient/includes/_proces_treatment_status.html.twig') }}
+        <div class='outer'>
+            <div class='inner'></div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-3 mb-2">
+                <h1 class="text-center"><strong>Intake </strong><small>patient {{ patient.lastName }}</small></h1>
+                <h3 class="text-right">Part 1/3</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header"><strong>Reason for intake</strong> Step 1</div>
+                    {% if treatment.indication is empty %}
+                    {{ form_start(form) }}
+                    <div class="card-body">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>1</strong> Direct medical reason for
+                                    intake?</label>
+                                <div class="col-md-9">
+                                    {{ form_row(form.indication, {'label':false}) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>2</strong> Pain indication on scale from 1
+                                    to 10?</label>
+                                <div class="col-md-9">
+                                    <div class="d-flex justify-content-between">
+                                        <p>1</p>
+                                        <div class="form-group custom-range-score-width"> {{ form_row(form.painIndication, {'label':false}) }}</div>
+                                        <p>10</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>3</strong> Referral to another healthcare
+                                    provider or patients own initiative?</label>
+                                <div class="col-md-9">
+                                   {{ form_row(form.refferal, {'label':false}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-sm btn-primary" type="submit">Save</button>
+                    </div>
+                    {{ form_end(form) }}
+                    {% else %}
+                       <div class="card-body">
+                           Question 1: {{ treatment.indication}} <br>
+                           Question 2: {{ treatment.painIndication}}<br>
+                           Question 3: {{ treatment.refferal}} <br>
+                       </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <div class="btn-group" role="group" aria-label="Custom pagination">
+                            <a href="{{ path('patient_intake_part_two',{'patient':patient.id}) }}">
+                                <button type="button" class="btn btn-sm btn-dark disabled">Back</button>
+                            </a>
+                            <a href="{{ path('patient_intake_part_two',{'patient':patient.id}) }}">
+                            <button type="button" class="btn btn-sm btn-dark border-left">Next</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    <ul class="list-group bg-white">
+                        <li class="list-group-item active"><strong>Step 1 &nbsp;<i class="fas fa-caret-down"></i></strong> Reason for intake</li>
+                        <li class="list-group-item"><a href="{{ path('patient_intake_part_two',{'patient':patient.id}) }}"><strong>Step 2 &nbsp;<i class="fas fa-caret-down"></i></strong> Additional information </a></li>
+                        <li class="list-group-item"><a href="{{ path('patient_intake_part_three',{'patient':patient.id}) }}"><strong>Step 3 &nbsp;<i class="fas fa-caret-down"></i></strong> Determination follow-up</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block customjavascripts %}
+    {% endblock %}
+{% endblock %}

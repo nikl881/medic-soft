@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MedicSoft | Patient intake {% endblock %}
+
+ {% block breadcrumb %}
+     <nav aria-label="breadcrumb ">
+         <ol class="breadcrumb custom-bar-color">
+             <li class="breadcrumb-item active">Intake</li>
+             <li class="breadcrumb-item"><a href="#">Diagnosis</a></li>
+             <li class="breadcrumb-item"><a href="#">Treatment</a></li>
+             <li class="breadcrumb-item"><a href="#">Aftercare</a></li>
+             <li class="ml-auto" aria-current="page">
+                 <div class=" px-3 d-flex align-items-center custom-bar-color "><i
+                             class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
+                     <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>
+                 </div>
+             </li>
+         </ol>
+     </nav>
+ {% endblock breadcrumb %}
+
+{% block main %}
+    <div class="container">
+        {{ include('patient/includes/_proces_treatment_status.html.twig') }}
+        <div class='outer'>
+            <div class='inner3'></div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-3">
+                <h1 class="text-center">Intake </h1>
+                <h3 class="text-right">Part 3/3</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header"><strong>Determination follow-up</strong> Step 3</div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>1</strong> Does the patient have existing
+                                    complaints?</label>
+                                <div class="col-md-9">
+                                    {{ form_row(form.existingComplaints, {'label':false}) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>2</strong> Does the patient suffer from weight
+                                    loss?</label>
+                                <div class="col-md-9">
+                                    {{ form_row(form.weightLoss, {'label':false}) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>3</strong> Are there any genetic abnormalities in the
+                                    family?</label>
+                                <div class="col-md-9">
+                                    {{ form_row(form.geneticDisorders, {'label':false}) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>4</strong> Has the patient undergone previous
+                                    operations?</label>
+                                <div class="col-md-9">
+                                    {{ form_row(form.formerOperations, {'label':false}) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>5</strong> Does the patient have chronic
+                                    illnesses?</label>
+                                <div class="col-md-9">
+                                    {{ form_row(form.chronicDisorders, {'label':false}) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3"><strong>6</strong> Are there intoxications or abuses?</label>
+                                <div class="col-md-9">
+                                    {{ form_row(form.intoxication, {'label':false}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-sm btn-primary" type="submit">Save</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <div class="btn-group" role="group" aria-label="Custom pagination">
+                            <a href="{{ path('patient_intake_part_two',{'patient':patient.id}) }}">
+                                <button type="button" class="btn btn-sm btn-dark">Back</button>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-dark border-left disabled">Next</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group bg-white">
+                            <li class="list-group-item"><a
+                                        href="{{ path('patient_intake_part_one',{'patient':patient.id}) }}"> <strong>Step
+                                        1</strong> Reason for intake</a></li>
+                            <li class="list-group-item"><a
+                                        href="{{ path('patient_intake_part_two',{'patient':patient.id}) }}"><strong>Step
+                                        2</strong> Additional information</a></li>
+                            <li class="list-group-item active"><strong>Step 3</strong> Determination follow-up</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block customjavascripts %}
+    {% endblock %}
+{% endblock %}

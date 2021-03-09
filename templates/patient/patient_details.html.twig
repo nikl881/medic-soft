@@ -2,13 +2,28 @@
 
 {% block title %}MedicSoft | Patient details {% endblock %}
 
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb custom-bar-color">
+            <li class="breadcrumb-item active"><a href="{{ path('patient_details',{'patient':patient.id}) }}">Patient details</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('patient_notes_list',{'patient':patient.id}) }}">Notes</a></li>
+            <li class="ml-auto" aria-current="page">
+                <div class=" px-3 d-flex align-items-center custom-bar-color "><i
+                            class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
+                    <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>
+                </div>
+            </li>
+        </ol>
+    </nav>
+{% endblock breadcrumb %}
+
 {% block main %}
     <div class="container">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3 bg-secondary rounded">
             <h1 class="px-3 header-custom-color">Medical record</h1>
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-dark">Start treatment</button>
+                    <a href="{{ path('patient_intake_part_one',{'patient':patient.id}) }}"><button type="button" class="btn btn-dark">Start treatment</button></a>
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <button type="button" class="btn btn btn-dark">Current treatment</button>
@@ -88,7 +103,7 @@
                                                 {% for notes in allPatientNotes %}
                                                 <ul class="list-group border-0">
                                                     <li class="list-group-item mb-1 d-flex justify-content-between">
-                                                        <div
+                                                        <div class="text-truncate"
                                                                 data-toggle="modal"
                                                                 data-target="#notesModal{{ notes.id }}">
                                                             {{ notes.title }}
