@@ -21,14 +21,17 @@
 
 {% block main %}
     <div class="container">
+        <a href="{{ path('patient_details',{'patient':patient.id}) }}">
+            <btn class="btn btn-dark disabled custom-margin"><i class="fas fa-chevron-left"></i> Return to patient card</btn>
+        </a>
         {{ include('patient/includes/_proces_treatment_status.html.twig') }}
         <div class='outer'>
             <div class='inner2'></div>
         </div>
         <div class="col-12">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-3">
-                <h1 class="text-center">Intake </h1>
-                <h3 class="text-right">Part 2/3</h3>
+                <h1 class="text-center"><strong>Intake </strong><small>patient {{ patient.lastName }}</small></h1>
+                <div class="btn btn-dark text-right disabled"> Part 2/3</div>
             </div>
         </div>
         <div class="row">
@@ -55,7 +58,7 @@
                     <div class="card-footer">
                         <button class="btn btn-sm btn-primary" type="submit">Save</button>
                     </div>
-                    {# {{ form_end(form) }} #}
+                     {{ form_end(form) }}
                 </div>
             </div>
             <div class="col-3"></div>
@@ -82,6 +85,7 @@
             </div>
         </div>
     </div>
+    
     {% block customjavascripts %}
     {% endblock %}
 {% endblock %}

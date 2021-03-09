@@ -5,7 +5,8 @@
 {% block breadcrumb %}
     <nav aria-label="breadcrumb ">
         <ol class="breadcrumb custom-bar-color">
-            <li class="breadcrumb-item active"><a href="{{ path('patient_details',{'patient':patient.id}) }}">Patient details</a></li>
+            <li class="breadcrumb-item active"><a href="{{ path('patient_details',{'patient':patient.id}) }}">Patient
+                    details</a></li>
             <li class="breadcrumb-item"><a href="{{ path('patient_notes_list',{'patient':patient.id}) }}">Notes</a></li>
             <li class="ml-auto" aria-current="page">
                 <div class=" px-3 d-flex align-items-center custom-bar-color "><i
@@ -23,7 +24,9 @@
             <h1 class="px-3 header-custom-color">Medical record</h1>
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <a href="{{ path('patient_intake_part_one',{'patient':patient.id}) }}"><button type="button" class="btn btn-dark">Start treatment</button></a>
+                    <a href="{{ path('patient_intake_part_one',{'patient':patient.id}) }}">
+                        <button type="button" class="btn btn-dark">Start treatment</button>
+                    </a>
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <button type="button" class="btn btn btn-dark">Current treatment</button>
@@ -33,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <hr class="border-card-custom">
+        {# <hr class="border-card-custom"> #}
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="card d-flex">
@@ -44,19 +47,18 @@
                                 {% if patient.profileImage == null %}
                                     <img class=" table-avatar-img-patient-card c-avatar-img-patient-card"
                                          src="https://medicsoft-bucket.s3.eu-central-1.amazonaws.com/images/avatar_placeholder.jpg"
-                                          alt="avatar placeholder">
+                                         alt="avatar placeholder">
                                 {% else %}
-                                    <img class="table-avatar-img-patient-card c-avatar-img-patient-card" src="{{ patient.profileImage }}"
+                                    <img class="table-avatar-img-patient-card c-avatar-img-patient-card"
+                                         src="{{ patient.profileImage }}"
                                          alt="profile avatar">
                                 {% endif %}
                                 <div class="mt-4">
                                     <h4><strong>{{ patient.name }} {{ patient.lastName }} </strong></h4>
                                 </div>
-
                                 {{ form_row(patientProfileForm.profileImage) }}
-
-                            <button class="btn btn-sm btn-success">Update</button>
-                            {{ form_end(patientProfileForm) }}
+                                <button class="btn btn-sm btn-success">Update</button>
+                                {{ form_end(patientProfileForm) }}
                             </div>
                         </div>
                     </div>
@@ -66,13 +68,13 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-8">
-                             {% if patient.patientRecordNotes is not empty %}
-                             <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i
-                             class="fas fa-exclamation-triangle text-danger"></i></div>
-                             {% else %}
-                             <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes
-                             </div>
-                             {% endif %}
+                            {% if patient.patientRecordNotes is not empty %}
+                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes <i
+                                            class="fas fa-exclamation-triangle text-danger"></i></div>
+                            {% else %}
+                                <div class="card-header border-0"><i class="fas fa-notes-medical"></i> General notes
+                                </div>
+                            {% endif %}
                             <div class="card-body">
                                 {{ form_start(notesForm) }}
                                 <div class="mb-2">
@@ -91,11 +93,15 @@
                                 <div class="accordion" id="accordion" role="tablist">
                                     <div class="card mb-0">
                                         <div class="card-header border-0" id="headingOne" role="tab">
-                                            <div class="mb-0 text-center"><a data-toggle="collapse" href="#collapseOne"
-                                                                             aria-expanded="false"
-                                                                             aria-controls="collapseOne"
-                                                                             class="collapsed text-dark"><i
-                                                            class="fas fa-arrow-alt-circle-down"></i> History</a></div>
+                                            <div class="mb-0 text-center">
+                                                <button class="btn btn-small bg-dark text-white" data-toggle="collapse"
+                                                        href="#collapseOne"
+                                                        aria-expanded="false"
+                                                        aria-controls="collapseOne"
+                                                        class="collapsed text-dark"><i
+                                                            class="fas fa-arrow-alt-circle-down"></i>&nbsp; History
+                                                </button>
+                                            </div>
                                         </div>
                                         <div class="collapse" id="collapseOne" role="tabpanel"
                                              aria-labelledby="headingOne" data-parent="#accordion" style="">
@@ -104,16 +110,12 @@
                                                 <ul class="list-group border-0">
                                                     <li class="list-group-item mb-1 d-flex justify-content-between">
                                                         <div class="text-truncate"
-                                                                data-toggle="modal"
-                                                                data-target="#notesModal{{ notes.id }}">
+                                                             data-toggle="modal"
+                                                             data-target="#notesModal{{ notes.id }}">
                                                             {{ notes.title }}
                                                         </div>
-
-{#                                                        {{ note.patient.id }}#}
-{#                                                        <a href="{{ path('delete_patient_note',{'patient':patient.id}) }}"><i class="fas fa-edit"></i></a>#}
                                                         <a href="{{ path('delete_patient_note', {'note' : notes.id}) }}"><i
                                                                     class="fas fa-trash text-danger"></i></a>
-
                                                     </li>
                                                     {% endfor %}
                                                     {% if allPatientNotes %}
