@@ -57,7 +57,7 @@ class PatientRecordNoteRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findAllPaginatedPatientNotes(Patient $patient, $page)
+    public function findAllPaginatedNotes($page, Patient $patient)
     {
         $qb = $this->createQueryBuilder('v');
 

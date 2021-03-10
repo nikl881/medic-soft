@@ -32,11 +32,9 @@ class DoctorListController extends AbstractController
      */
     public function showDoctorList($page, Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
     {
-
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findAllPaginatedDoctors($page);
-
 
         return $this->render('doctor/doctor_list.html.twig', [
                 'users' => $users

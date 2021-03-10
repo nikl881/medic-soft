@@ -10,7 +10,7 @@ use App\Form\UpdateProfileImagePatientType;
 use App\Repository\PatientRepository;
 use App\Utils\uploadImagesToS3;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,11 +75,9 @@ class PatientListController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $patient = $form->getData();
             $patient->setdateCreated(new \DateTime());
-
             $this->addFlash('success', 'New patient added');
 
             $em->persist($patient);
@@ -99,6 +97,20 @@ class PatientListController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/patient/details/notes-list/{patient}/{page}", defaults={"page": 1 }, name="patient_notes_list")
+     */
+    public function patientNotesList($page, Patient $patient)
+    {
+        $patientRecordNote = $this->getDoctrine()
+            ->getRepository(PatientRecordNote::class)
+            ->findAllPaginatedNotes($page, $patient);
+
+        return $this->render('patient/patient_notes_list.html.twig', [
+            'patientRecordNote' => $patientRecordNote,
+        ]);
+
+    }
 
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
@@ -152,24 +164,6 @@ class PatientListController extends AbstractController
             'allPatientNotes' => $getNoteQuery,
             'notesForm' => $notesForm->createView(),
             'patientProfileForm' => $profileImageForm->createView(),
-        ]);
-
-    }
-
-    /**
-     * @Route("/patient/details/notes-list/{patient}/{page}",  defaults={"page": 1 }, name="patient_notes_list")
-     */
-    public function patientNotesList(Patient $patient, $page)
-    {
-
-        $notes = $this->getDoctrine()
-            ->getRepository(PatientRecordNote::class)
-            ->findAllPaginatedPatientNotes($patient, $page);
-
-
-        return $this->render('patient/patient_notes_list.html.twig', [
-            'patient' => $patient,
-            'notes' => $notes,
         ]);
 
     }
