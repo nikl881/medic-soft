@@ -59,7 +59,7 @@ body {
 }
 
 .custom-bar-color{
-    background-color: #cacaca;
+    background-color: #ffffff;
 }
 
 .border-card-custom{
@@ -76,7 +76,7 @@ body {
 }
 
 .custom-bar-color{
-    background-color: #cacaca;
+    background-color: #ffffff;
 }
 
 .custom-range-score-width{
@@ -88,19 +88,19 @@ body {
     width: auto;
 }
 .inner{
-    background-color: #cfa956;
+    background-color: #321fdb;
     width: 5.5%;
     height: 5px;
 }
 
 .inner2{
-    background-color: #cfa956;
+    background-color: #321fdb;
     width: 11%;
     height: 5px;
 }
 
 .inner3{
-    background-color: #cfa956;
+    background-color: #321fdb;
     width: 16.5%;
     height: 5px;
 }

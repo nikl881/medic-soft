@@ -21,7 +21,7 @@ class AddPatientGeneralNoteType extends AbstractType
                 'data' => 'Title..',
             ])
             ->add('content', TextType::class, [
-                'attr' => array('style' => 'height: 100px'),
+                'attr' => array('style' => 'height: 40px'),
                  'data' => 'Add a new note here..',
                 'label' => false,
             ])

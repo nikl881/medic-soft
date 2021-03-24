@@ -2,27 +2,27 @@
 
 {% block title %}MedicSoft | Patient notes {% endblock %}
 
-{#{% block breadcrumb %}#}
-{#    <nav aria-label="breadcrumb ">#}
-{#        <ol class="breadcrumb custom-bar-color">#}
-{#            <li class="breadcrumb-item"><a href="{{ path('patient_details',{'patient':patient.id}) }}">Patient details</a></li>#}
-{#            <li class="breadcrumb-item active"><a href="{{ path('patient_notes_list',{'patient':patient.id}) }}">Notes</a></li>#}
-{#            <li class="ml-auto" aria-current="page">#}
-{#                <div class=" px-3 d-flex align-items-center custom-bar-color "><i#}
-{#                            class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;#}
-{#                    <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>#}
-{#                </div>#}
-{#            </li>#}
-{#        </ol>#}
-{#    </nav>#}
-{#{% endblock breadcrumb %}#}
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb custom-bar-color">
+            <li class="breadcrumb-item"><a href="{{ path('patient_details',{'patient':patient.id}) }}">Patient details</a></li>
+            <li class="breadcrumb-item active"><a href="{{ path('patient_notes_list',{'patient':patient.id}) }}">Notes</a></li>
+            <li class="ml-auto" aria-current="page">
+                <div class=" px-3 d-flex align-items-center custom-bar-color "><i
+                            class="fas fa-calendar"></i>&nbsp; {{ "now"|date("m/d/Y") }}&nbsp;&nbsp;
+                    <i class="fas fa-clock"></i>&nbsp;<div id='time-part'></div>
+                </div>
+            </li>
+        </ol>
+    </nav>
+{% endblock breadcrumb %}
 
 {% block main %}
     <div class="container">
     <div class="row">
         <div class="col-10">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
-{#                <h1 class="text-center"><i class="fas fa-user"></i> List of all notes for patient {{ patient.lastName }} </h1>#}
+                <h1 class="text-center"><i class="fas fa-user"></i> List of all notes for patient {{ patient.lastName }} </h1>
             </div>
         </div>
         <div class="col-2">

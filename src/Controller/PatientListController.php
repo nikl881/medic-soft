@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Patient;
 use App\Entity\PatientRecordNote;
+use App\Entity\Treatment;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Form\UpdateProfileImagePatientType;
@@ -108,6 +109,7 @@ class PatientListController extends AbstractController
 
         return $this->render('patient/patient_notes_list.html.twig', [
             'patientRecordNote' => $patientRecordNote,
+            'patient' => $patient,
         ]);
 
     }
@@ -118,6 +120,7 @@ class PatientListController extends AbstractController
     public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3)
     {
         $patientRecordNote = $this->getDoctrine()->getRepository(PatientRecordNote::class);
+        $patientTreatment = $this->getDoctrine()->getRepository(Treatment::class);
 
         $note = new PatientRecordNote();
         $notesForm = $this->createForm(AddPatientGeneralNoteType::class, $note);
@@ -162,6 +165,7 @@ class PatientListController extends AbstractController
             'patient' => $patient,
             'patientRecordNote' => $patientRecordNote,
             'allPatientNotes' => $getNoteQuery,
+            'patientTreatment' => $patientTreatment,
             'notesForm' => $notesForm->createView(),
             'patientProfileForm' => $profileImageForm->createView(),
         ]);
@@ -181,5 +185,14 @@ class PatientListController extends AbstractController
 
         return $this->redirectToRoute('patient_details', ['patient' => $getPatient->getId()]);
     }
+
+    /**
+     * @Route("/patient/details/edit/{patient}", name="edit_patient_settings")
+     */
+    public function editPatientSettings()
+    {
+        return $this->render('patient/edit_patient_settings.html.twig');
+    }
+
 
 }
