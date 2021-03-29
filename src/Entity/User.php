@@ -100,10 +100,10 @@ class User implements UserInterface
     private $address;
 
 
-    public function __construct()
-    {
-        $this->patients = new ArrayCollection();
-    }
+//    public function __construct()
+//    {
+//        $this->patients = new ArrayCollection();
+//    }
 
     public function getId(): ?int
     {
@@ -196,6 +196,7 @@ class User implements UserInterface
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
     /**
@@ -306,36 +307,6 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Patient[]
-     */
-    public function getPatients(): Collection
-    {
-        return $this->patients;
-    }
-
-    public function addPatient(Patient $patient): self
-    {
-        if (!$this->patients->contains($patient)) {
-            $this->patients[] = $patient;
-            $patient->setPrimaryDoctor($this);
-        }
-
-        return $this;
-    }
-
-    public function removePatient(Patient $patient): self
-    {
-        if ($this->patients->removeElement($patient)) {
-            // set the owning side to null (unless already changed)
-            if ($patient->getPrimaryDoctor() === $this) {
-                $patient->setPrimaryDoctor(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     public function getUserId()
@@ -351,17 +322,16 @@ class User implements UserInterface
         $this->user_id = $user_id;
     }
 
-    public function getAddress(): ?address
+    public function getAddress(): ?Address
     {
         return $this->address;
     }
 
-    public function setAddress(?address $address): self
+    public function setAddress(?Address $address): self
     {
         $this->address = $address;
 
         return $this;
     }
-
 
 }

@@ -81,12 +81,12 @@ class PatientRecordNote
         return $this;
     }
 
-    public function getPatient(): ?patient
+    public function getPatient(): ?Patient
     {
         return $this->patient;
     }
 
-    public function setPatient(?patient $patient): self
+    public function setPatient(?Patient $patient): self
     {
         $this->patient = $patient;
 

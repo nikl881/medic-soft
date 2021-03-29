@@ -30,7 +30,7 @@ class DoctorListController extends AbstractController
     /**
      * @Route("/doctor/list/{page}", defaults={"page": 1 }, name="doctor_list")
      */
-    public function showDoctorList($page, Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
+    public function showDoctorList($page, Request $request, PaginatorInterface $paginator): Response
     {
         $users = $this->getDoctrine()
             ->getRepository(User::class)
