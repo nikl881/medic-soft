@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-2">
-            <div class="btn btn-success mb-3 float-right" data-toggle="modal" data-target="#patientModal"><i
+            <div class="btn btn-success mb-3 float-right" data-toggle="modal" data-target="#newPatientModal"><i
                         class="fas fa-plus"></i> Add patient
             </div>
         </div>
@@ -84,7 +84,8 @@
                 $('#basicExampleModal').modal('show');
             });
         </script>
-        <div class="modal fade" id="patientModal" tabindex="-1" role="dialog">
+
+        <div class="modal fade" id="newPatientModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">Modal</div>
@@ -92,9 +93,7 @@
                         {{ form_start(form) }}
                         {% if not form.vars.valid %}
                             <script type="text/javascript">
-                                $(window).on('load', function () {
-                                    $('#patientModal').modal('show');
-                                });
+                                $('#newPatientModal').modal('show');
                             </script>
                         {% endif %}
                         {{ form_end(form) }}
