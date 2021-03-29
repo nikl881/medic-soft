@@ -16,7 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class IntakeController extends AbstractController
 {
     /**
-     * @Route("/patient/intake-part-one/{patient}", name="patient_intake_part_one")
+     * @Route("/patient/select-treatment/{patient}", name="select_treatment")
+     */
+    public function selectTreatment(Request $request)
+    {
+        // new treatment for current patient here.
+
+        $treatment = new Treatment();
+        $form = $this->createForm(SelectTreatmentType::class, $treatment);
+
+        dd($treatment);
+
+        return $this->render('patient/intake/select_treatment.html.twig');
+    }
+
+    /**
+     * @Route("/patient/intake-part-one", name="patient_intake_part_one")
      */
     public function intakePartOne(Request $request, Patient $patient, Treatment $treatment): Response
     {
@@ -31,7 +46,7 @@ class IntakeController extends AbstractController
            $em->persist($treatment);
            $em->flush();
 
-            return $this->redirectToRoute('patient_intake_part_one', ['patient' => $patient->getId()]);
+            return $this->redirectToRoute('patient_intake_part_two', ['patient' => $patient->getId()]);
         }
 
 

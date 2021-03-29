@@ -76,6 +76,7 @@
                     {{ form_end(form) }}
                     {% else %}
                        <div class="card-body">
+                           {{ dump(treatment.id) }}
                            Question 1: {{ treatment.indication}} <br>
                            Question 2: {{ treatment.painIndication}}<br>
                            Question 3: {{ treatment.refferal}} <br>
