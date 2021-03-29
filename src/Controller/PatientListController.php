@@ -77,7 +77,9 @@ class PatientListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $patient = $form->getData();
+            $currentDoctor = $this->getUser();
             $patient->setdateCreated(new \DateTime());
+            $patient->setUser($currentDoctor);
             $this->addFlash('success', 'New patient added');
 
             $em->persist($patient);
