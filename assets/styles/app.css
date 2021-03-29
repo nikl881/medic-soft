@@ -19,6 +19,7 @@ body {
     width: 120px;
 }
 
+
 @media (min-width: 0px) and (max-width: 1024px) {
     .c-avatar-img{
         display: none!important;
@@ -48,8 +49,8 @@ body {
 }
 
 .c-avatar-img-patient-card{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 

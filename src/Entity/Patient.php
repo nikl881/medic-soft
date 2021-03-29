@@ -217,32 +217,34 @@ class Patient
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
     }
 
 
-public function getAddress(): ?address
-{
-    return $this->address;
-}
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
 
-public function setAddress(?address $address): self
-{
-    $this->address = $address;
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
 
-    return $this;
-}
+        return $this;
+    }
 
-public function getProfileImage(): ?string
-{
-    return $this->profileImage;
-}
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
 
-public function setProfileImage(?string $profileImage): self
-{
-    $this->profileImage = $profileImage;
+    public function setProfileImage(?string $profileImage): self
+    {
+        $this->profileImage = $profileImage;
 
-    return $this;
-}
+        return $this;
+    }
 
     /**
      * @return mixed

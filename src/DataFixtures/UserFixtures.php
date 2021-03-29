@@ -18,11 +18,6 @@ class UserFixtures extends Fixture
         $this->encoder = $encoder;
     }
 
-    protected function dateCreated()
-    {
-        $dateTime = $this->dateCreated = new DateTime();
-
-    }
 
     public function load(ObjectManager $manager)
     {
