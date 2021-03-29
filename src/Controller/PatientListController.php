@@ -8,6 +8,7 @@ use App\Entity\Treatment;
 use App\Form\AddPatientGeneralNoteType;
 use App\Form\AddPatientType;
 use App\Form\UpdateProfileImagePatientType;
+use App\Repository\PatientRecordNoteRepository;
 use App\Repository\PatientRepository;
 use App\Utils\uploadImagesToS3;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +37,7 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/list-total/{page}",  defaults={"page": 1 }, name="patient_list_total")
      */
-    public function showAllPatientList($page, Request $request): Response
+    public function showAllPatientList($page, Request $request, PatientRepository $patientRepository): Response
     {
         $form = $this->createForm(AddPatientType::class);
         $form->handleRequest($request);
@@ -55,9 +56,7 @@ class PatientListController extends AbstractController
             return $this->redirectToRoute('patient_list_total');
         }
 
-        $patients = $this->getDoctrine()
-            ->getRepository(Patient::class)
-            ->findAllPaginatedPatients($page);
+        $patients = $patientRepository->findAllPaginatedPatients($page);
 
         return $this->render('patient/patient_list_total.html.twig', [
             'patients' => $patients,
@@ -68,7 +67,7 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/list-doctor/{page}",  defaults={"page": 1 }, name="patient_list_doctor")
      */
-    public function showDoctorsPatientList($page, Request $request): Response
+    public function showDoctorsPatientList($page, Request $request, PatientRepository $patientRepository): Response
     {
         $user = $this->getUser();
 
@@ -87,10 +86,7 @@ class PatientListController extends AbstractController
             return $this->redirectToRoute('patient_list_doctor');
         }
 
-        $allDoctorIdInPatientList = $this->getDoctrine()
-            ->getRepository(Patient::class)
-            ->getDoctorForPatientList($user, $page);
-
+        $allDoctorIdInPatientList = $patientRepository->getDoctorForPatientList($user, $page);
 
         return $this->render('patient/patient_list_doctor.html.twig', [
             'patients' => $allDoctorIdInPatientList,
@@ -101,11 +97,10 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/notes-list/{patient}/{page}", defaults={"page": 1 }, name="patient_notes_list")
      */
-    public function patientNotesList($page, Patient $patient)
+    public function patientNotesList($page, Patient $patient, PatientRecordNoteRepository $patientRecordNoteRepository)
     {
-        $patientRecordNote = $this->getDoctrine()
-            ->getRepository(PatientRecordNote::class)
-            ->findAllPaginatedNotes($page, $patient);
+
+        $patientRecordNote = $patientRecordNoteRepository->findAllPaginatedNotes($page, $patient);
 
         return $this->render('patient/patient_notes_list.html.twig', [
             'patientRecordNote' => $patientRecordNote,
@@ -117,7 +112,7 @@ class PatientListController extends AbstractController
     /**
      * @Route("/patient/details/{patient}", name="patient_details")
      */
-    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3)
+    public function patientDetails(Patient $patient, Request $request, EntityManagerInterface $entityManager, UploadImagesToS3 $toS3, PatientRecordNoteRepository $patientRecordNoteRepository)
     {
         $patientRecordNote = $this->getDoctrine()->getRepository(PatientRecordNote::class);
         $patientTreatment = $this->getDoctrine()->getRepository(Treatment::class);
@@ -156,10 +151,7 @@ class PatientListController extends AbstractController
             $this->entityManager->flush();
         }
 
-        $getNoteQuery = $this->getDoctrine()
-            ->getRepository(PatientRecordNote::class)
-            ->getPatientNotesQuery($note, $patient);
-
+        $getNoteQuery = $patientRecordNoteRepository->getPatientNotesQuery($note, $patient);
 
         return $this->render('patient/patient_details.html.twig', [
             'patient' => $patient,
