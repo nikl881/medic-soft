@@ -7,6 +7,8 @@ use App\Entity\Treatment;
 use App\Form\IntakeDeterminationType;
 use App\Form\IntakeReasonType;
 use App\Form\IntakeUrgencyType;
+use App\Form\SelectNewTreatmentType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,20 +20,33 @@ class IntakeController extends AbstractController
     /**
      * @Route("/patient/select-treatment/{patient}", name="select_treatment")
      */
-    public function selectTreatment(Request $request)
+    public function selectTreatment(Request $request, Patient $patient, EntityManagerInterface $em)
     {
-        // new treatment for current patient here.
 
         $treatment = new Treatment();
-        $form = $this->createForm(SelectTreatmentType::class, $treatment);
+        $form = $this->createForm(SelectNewTreatmentType::class, $treatment);
+        $form->handleRequest($request);
 
-        dd($treatment);
+        if($form->isSubmitted() && $form->isValid()) {
 
-        return $this->render('patient/intake/select_treatment.html.twig');
+            $treatment->setPatient($patient);
+            $em->persist($treatment);
+            $em->flush();
+
+            dd($treatment); // new treatment added here.
+
+            return $this->redirectToRoute('patient_intake_part_one', ['treatment' => $treatment]);
+        }
+
+        return $this->render('patient/intake/select_treatment.html.twig', [
+            'form' => $form->createView(),
+            'patient' => $patient,
+            'treatment' => $treatment,
+        ]);
     }
 
     /**
-     * @Route("/patient/intake-part-one", name="patient_intake_part_one")
+     * @Route("/patient/intake-part-one/{treatment}", name="patient_intake_part_one")
      */
     public function intakePartOne(Request $request, Patient $patient, Treatment $treatment): Response
     {
